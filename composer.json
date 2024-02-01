@@ -1,0 +1,17 @@
+{
+  "name": "kyounggr/328/Master-Sushi-Chef",
+  "description": "Sushi Restaurant website SDEV328",
+  "authors": [
+    {
+      "name": "Kayley Young",
+      "email": "young.kayley@student.greenriver.edu"
+    },
+    {
+      "name": "Levi Miller",
+      "email": "miller.levi@student.greenriver.edu"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}

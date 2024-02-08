@@ -14,7 +14,7 @@ $f3->route('GET /', function() {
 
     //display a view page
     $view = new Template();// template is a class from fat-free
-    echo $view->render('views/home.html');
+    echo $view->render('views/homePage.html');
 });
 //run Fat-Free
 $f3->run();

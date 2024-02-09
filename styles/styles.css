@@ -13,11 +13,16 @@
 
 .card-text{
     font-size: 15px !important;
+    font-weight: bold;
 }
 #about{
     font-size: 35px;
     text-align: center;
+    margin-top: 15px;
 }
 .btn{
      background-color: #f6a9a2 !important;
  }
+#homeBody{
+    background-color: #f5b15b;
+}

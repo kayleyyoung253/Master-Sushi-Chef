@@ -3,12 +3,14 @@
 <!-- homePage.html: homepage for Master Sushi Chef -->
 <html lang="eng">
 <include href="views/header.html" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body>
 <div id="homeBody">
-<div class="container">
     <div class="row">
         <!-- left colum -->
-        <div class="col-6">
+        <div class="col-6" id="leftColum">
+            <div class="container">
             <div class="card border border-dark">
                 <h5 id="about">About Master Sushi Chef</h5>
                 <div class="card-body">
@@ -20,14 +22,16 @@
                 </div>
             </div>
         </div>
+        </div>
         <!--right colum -->
-        <div class="col-6">
+        <div class="col-6" id="rightColum">
+            <div class="container">
             <div class="image-container">
                 <img src="images/sushi.webp" alt="sushi" class="w-100 rounded-5" id="sushiPic">
             </div>
         </div>
+        </div>
     </div>
-</div>
 </div>
 </body>
 </html>

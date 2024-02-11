@@ -1,6 +1,4 @@
-:root{
-    background-color: #efb0a9;
-}
+
 .image-container{
     padding: 15px;
     height: 100%;
@@ -30,13 +28,24 @@
 .btn{
      background-color:#efb0a9  !important;
  }
-.nav-item {
+.nav-link {
    font-family: fantasy;
+    margin: 10px;
 }
 #homeBody{
     background-color: #f3b584;
+    width: 100% !important;
 }
 #aboutUsText{
     font-weight: bold;
     font-family: fantasy;
+}
+#rightColum,#leftColum{
+    min-width: 500px;
+}
+.navbar{
+    max-width: 100%; !important;
+}
+.navbar-nav,.navbar,#navbar-nav{
+    background-color: white;
 }

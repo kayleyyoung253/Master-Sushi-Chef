@@ -16,5 +16,15 @@ $f3->route('GET /', function() {
     $view = new Template();// template is a class from fat-free
     echo $view->render('views/homePage.html');
 });
+
+//Define a default route-invoking route method
+$f3->route('GET /menu', function() {
+
+    //display a view page
+    $view = new Template();// template is a class from fat-free
+    echo $view->render('views/menu.html');
+});
+
+
 //run Fat-Free
 $f3->run();

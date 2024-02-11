@@ -17,12 +17,13 @@ $f3->route('GET /', function() {
     echo $view->render('views/homePage.html');
 });
 
+
 //Define a default route-invoking route method
-$f3->route('GET /menu', function() {
+$f3->route('GET /order', function() {
 
     //display a view page
     $view = new Template();// template is a class from fat-free
-    echo $view->render('views/menu.html');
+    echo $view->render('views/order.html');
 });
 
 

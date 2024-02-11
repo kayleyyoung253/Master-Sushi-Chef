@@ -34,6 +34,7 @@
 }
 #homeBody{
     background-color: #f3b584;
+    min-width: fit-content;
     width: 100% !important;
 }
 #aboutUsText{
@@ -44,8 +45,9 @@
     min-width: 500px;
 }
 .navbar{
-    max-width: 100%; !important;
+    min-width: fit-content;
 }
 .navbar-nav,.navbar,#navbar-nav{
     background-color: white;
+    min-width: fit-content;
 }

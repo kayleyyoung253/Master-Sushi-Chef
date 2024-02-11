@@ -23,6 +23,7 @@
     font-family: fantasy;
 }
 #orderButton{
+
     font-family: "Comic Sans MS", serif ;
 }
 .btn{
@@ -42,7 +43,7 @@
     font-family: fantasy;
 }
 #rightColum,#leftColum{
-    min-width: 500px;
+    min-width: 350px;
 }
 .navbar{
     min-width: fit-content;

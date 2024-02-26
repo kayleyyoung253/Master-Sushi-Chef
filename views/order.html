@@ -5,10 +5,41 @@
     <meta charset="UTF-8">
     <title>Order Here</title>
 </head>
-<body>
+<body id="orderBody">
 <include href="views/NavBar.html"/>
-<div class="container">
-    <h1>Order Here</h1>
+
+<div class="container" id="orderOptions">
+    <h2>Appetizers</h2>
+    <form action="#" method="post">
+    <div class="container" id="apps">
+    <repeat group="{{ @appetizer }}" value=" {{ @appetizers }}">
+    <label>
+        <input type="checkbox"
+               name="appetizer[]"
+               id="{{ @appetizers }}"
+               value="{{ @appetizers }}"
+        > {{ ucwords(@appetizers) }}
+        </input>
+    </label><br>
+    </repeat>
+    </div>
+    <h2 id="sushiOrder">Sushi Rolls</h2>
+    <div class="container" id="rolls">
+        <repeat group="{{ @roll }}" value=" {{ @rolls }}">
+            <label>
+                <input type="checkbox"
+                       name="roll[]"
+                       id="{{ @rolls }}"
+                       value="{{ @rolls }}"
+                > {{ ucwords(@rolls) }}
+                </input>
+            </label><br>
+        </repeat>
+    </div>
+        <div class="col-md-auto" id="nextButtonContainer">
+        <button type="submit" id="nextButton" class="btn btn-primary">Check Out</button>
+    </div>
+    </form>
 </div>
 </body>
 </html>

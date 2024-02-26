@@ -19,6 +19,31 @@ $f3->route('GET /', function() {
 
 //Define a default route-invoking route method
 $f3->route('GET|POST /order', function($f3) {
+
+
+    // If the form has been posted
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+        // Validate the data
+        if (isset($_POST['appetizer'])) {
+            $app = implode(", ", $_POST['appetizer']);
+        } else {
+            $app = "None selected";
+        }
+        if (isset($_POST['roll'])) {
+            $roll = implode(", ", $_POST['roll']);
+        } else {
+            $roll = "None selected";
+        }
+
+        // Put the data in the session array
+        $f3->set('SESSION.app', $app);
+        $f3->set('SESSION.roll', $roll);
+
+        // Redirect to summary route
+        $f3->reroute('menu');
+    }
+
     $GLOBALS['con']->order();
 });
 

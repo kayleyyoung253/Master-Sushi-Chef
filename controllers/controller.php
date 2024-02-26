@@ -25,7 +25,7 @@ class Controller
     {
 
         $this->_f3->set('appetizer', menuData::getAppetizer());
-        $this->_f3->set('rolls', menuData::getRolls());
+        $this->_f3->set('roll', menuData::getRolls());
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/order.html');

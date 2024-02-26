@@ -33,7 +33,7 @@
    font-family: fantasy;
     margin: 10px;
 }
-#homeBody{
+#homeBody,#orderBody{
     background-color: #f3b584;
     min-width: fit-content;
     width: 100% !important;
@@ -51,4 +51,19 @@
 .navbar-nav,.navbar,#navbar-nav{
     background-color: white;
     min-width: fit-content;
+}
+#apps,#rolls{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+#sushiOrder{
+    margin-top: 25px;
+}
+#orderOptions{
+    margin-top:50px;
+}
+#nextButtonContainer{
+   padding-top: 25px;
 }

@@ -24,12 +24,22 @@ class Controller
     function order()
     {
 
+
         $this->_f3->set('appetizer', menuData::getAppetizer());
         $this->_f3->set('roll', menuData::getRolls());
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/order.html');
     }
+
+    function checkout()
+    {
+        //display a view page
+        $view = new Template();// template is a class from fat-free
+        echo $view->render('views/checkout.html');
+    }
+
+
     function menu()
     {
         //display a view page

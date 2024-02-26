@@ -11,6 +11,21 @@ require_once ('vendor/autoload.php');
 $f3 = Base::instance();  //instance method
 $con = new Controller($f3);
 
+session_start();
+$price = array(
+    'Gyoza' => 5.99,
+    'Edamame' => 3.99,
+    'Green beans' => 3.99,
+    'Sashimi' => 24.99,
+    'Ajitama' => 3.99,
+    'Miso soup' => 4.99,
+    'California roll' => 8.99,
+    'Spicy tuna roll' => 8.99,
+    'Seattle roll' => 11.99,
+    'New york roll' => 13.99,
+    'Dragon roll' => 12.99
+);
+
 //Define a default route-invoking route method
 $f3->route('GET /', function() {
     $GLOBALS['con']->home();
@@ -19,8 +34,7 @@ $f3->route('GET /', function() {
 
 //Define a default route-invoking route method
 $f3->route('GET|POST /order', function($f3) {
-
-
+    $totalPrice = null;
     // If the form has been posted
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -36,16 +50,45 @@ $f3->route('GET|POST /order', function($f3) {
             $roll = "None selected";
         }
 
+
+        // calculating appetizer
+        if(isset($_POST['appetizer'])){
+            foreach ($_POST['appetizer'] as $appetizer){
+                if (isset($price[$appetizer])){
+                    $totalPrice = $totalPrice + $price[$appetizer];
+                }
+            }
+        }
+        // calculating rolls
+        if(isset($_POST['roll'])){
+            foreach ($_POST['roll'] as $roll){
+                if(isset($price[$roll])) {
+                    $totalPrice = $totalPrice + $price[$roll];
+                }
+            }
+        }
+
+
         // Put the data in the session array
         $f3->set('SESSION.app', $app);
         $f3->set('SESSION.roll', $roll);
+        $f3->set('SESSION.totalPrice', $totalPrice);
 
         // Redirect to summary route
-        $f3->reroute('menu');
+        $f3->reroute('checkout');
     }
 
     $GLOBALS['con']->order();
 });
+
+//Define a default route to menu
+$f3->route('GET /checkout', function() {
+
+
+
+    $GLOBALS['con']->checkout();
+});
+
 
 //Define a default route to menu
 $f3->route('GET /menu', function() {

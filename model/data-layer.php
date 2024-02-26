@@ -13,5 +13,4 @@ class menuData{
         return array('California roll','Spicy tuna roll', 'Seattle roll', 'Master roll', 'New york roll', 'Dragon roll');
     }
 
-
 }

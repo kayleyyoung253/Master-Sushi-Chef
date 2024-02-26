@@ -1,0 +1,16 @@
+<include href="views/header.html" />
+<body id="checkoutBody">
+<include href="views/NavBar.html"/>
+<div class="container">
+    <div class="card">
+        <h3>Checkout</h3>
+<ul class="list-group">
+    <li class="list-group-item">Rolls: {{ @SESSION.roll }}</li>
+    <li class="list-group-item">Appetizers: {{ @SESSION.app }}</li>
+    <li class="list-group-item">Total: {{ @SESSION.totalPrice }}</li>
+
+</ul>
+    </div>
+</div>
+</body>
+</html>

@@ -8,22 +8,17 @@ require_once ('vendor/autoload.php');
 
 //Instantiate Fat-Free framework (f3)
 $f3 = Base::instance();  //instance method
+$con = new Controller($f3);
 
 //Define a default route-invoking route method
 $f3->route('GET /', function() {
-
-    //display a view page
-    $view = new Template();// template is a class from fat-free
-    echo $view->render('views/homePage.html');
+    $GLOBALS['con']->home();
 });
 
 
 //Define a default route-invoking route method
 $f3->route('GET /order', function() {
-
-    //display a view page
-    $view = new Template();// template is a class from fat-free
-    echo $view->render('views/order.html');
+    $GLOBALS['con']->order();
 });
 
 

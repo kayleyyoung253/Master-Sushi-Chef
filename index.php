@@ -21,6 +21,12 @@ $f3->route('GET /order', function() {
     $GLOBALS['con']->order();
 });
 
+//Define a default route to menu
+$f3->route('GET /menu', function() {
+    $GLOBALS['con']->menu();
+});
+
+
 
 //run Fat-Free
 $f3->run();

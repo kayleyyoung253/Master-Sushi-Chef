@@ -16,17 +16,23 @@ class Controller
 
     function home()
     {
-        //echo "My Diner";
 
         // Display a view page
         $view = new Template();
         echo $view->render('views/homePage.html');
     }
-    function order(){
+    function order()
+    {
 
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/order.html');
+    }
+    function menu()
+    {
+        //display a view page
+        $view = new Template();// template is a class from fat-free
+        echo $view->render('views/menu.html');
     }
 
 }

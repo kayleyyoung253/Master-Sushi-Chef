@@ -4,7 +4,7 @@
  * the controller class for MasterSushi Chef
  *
  */
-
+require_once ('model/data-layer.php');
 class Controller
 {
     private $_f3; //Fat-free router
@@ -24,6 +24,8 @@ class Controller
     function order()
     {
 
+        $this->_f3->set('appetizer', menuData::getAppetizer());
+        $this->_f3->set('rolls', menuData::getRolls());
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/order.html');

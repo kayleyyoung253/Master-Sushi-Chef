@@ -16,15 +16,12 @@ class Controller
 
     function home()
     {
-
         // Display a view page
         $view = new Template();
         echo $view->render('views/homePage.html');
     }
     function order()
     {
-
-
         $this->_f3->set('appetizer', menuData::getAppetizer());
         $this->_f3->set('roll', menuData::getRolls());
         //display a view page

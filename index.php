@@ -10,8 +10,9 @@ require_once ('vendor/autoload.php');
 //Instantiate Fat-Free framework (f3)
 $f3 = Base::instance();  //instance method
 $con = new Controller($f3);
+$menuData = new MenuData();
 
-session_start();
+
 $price = array(
     'Gyoza' => 5.99,
     'Edamame' => 3.99,

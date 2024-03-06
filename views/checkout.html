@@ -2,15 +2,22 @@
 <body id="checkoutBody">
 <include href="views/NavBar.html"/>
 <div class="container">
-    <div class="card">
-        <h3>Checkout</h3>
-<ul class="list-group">
+    <div class="card"><h3 class="checkoutCard"> Checkout</h3>
+<div class="row">
+    <div class="col-6">
+        <ul class="list-group">
     <li class="list-group-item">Rolls: {{ @SESSION.roll }}</li>
     <li class="list-group-item">Appetizers: {{ @SESSION.app }}</li>
-    <li class="list-group-item">Total: {{ @SESSION.totalPrice }}</li>
-
 </ul>
     </div>
+    <div class="col-6">
+        <ul class="list-group">
+            <li class="list-group-item">Rewards earned: </li>
+            <li class="list-group-item">Total: {{ @SESSION.totalPrice }}</li>
+        </ul>
+    </div>
+</div>
+</div>
 </div>
 </body>
 </html>

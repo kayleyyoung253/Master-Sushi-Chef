@@ -34,7 +34,7 @@ $f3->route('GET /', function() {
 
 //Define a default route-invoking route method
 $f3->route('GET|POST /order', function($f3) {
-    $totalPrice = null;
+
     // If the form has been posted
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -50,7 +50,7 @@ $f3->route('GET|POST /order', function($f3) {
             $roll = "None selected";
         }
 
-
+        $totalPrice = 0;
         // calculating appetizer
         if(isset($_POST['appetizer'])){
             foreach ($_POST['appetizer'] as $appetizer){
@@ -61,9 +61,9 @@ $f3->route('GET|POST /order', function($f3) {
         }
         // calculating rolls
         if(isset($_POST['roll'])){
-            foreach ($_POST['roll'] as $roll){
-                if(isset($price[$roll])) {
-                    $totalPrice = $totalPrice + $price[$roll];
+            foreach ($_POST['roll'] as $selectedRoll){
+                if(isset($price[$selectedRoll])) {
+                   echo $totalPrice = $totalPrice + $price[$selectedRoll];
                 }
             }
         }

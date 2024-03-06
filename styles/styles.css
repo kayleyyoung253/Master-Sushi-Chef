@@ -13,7 +13,7 @@
 }
 
 
-.list-group,.list-group-item{
+.list-group{
     background-color: #efb0a9 !important;
 }
 .card-text{
@@ -70,4 +70,7 @@
 }
 #nextButtonContainer{
    padding-top: 25px;
+}
+.checkoutCard{
+    align-self: center;
 }

@@ -84,10 +84,14 @@ $f3->route('GET|POST /order', function($f3) {
 
 //Define a default route to menu
 $f3->route('GET /checkout', function() {
-
-
-
     $GLOBALS['con']->checkout();
+});
+
+
+
+//Define a default route to menu
+$f3->route('GET|POST /login', function() {
+    $GLOBALS['con']->login();
 });
 
 

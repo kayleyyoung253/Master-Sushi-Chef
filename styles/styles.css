@@ -1,76 +1,129 @@
 
-.image-container{
+.image-container
+{
     padding: 15px;
     height: 100%;
 }
-#sushiPic{
+
+#sushiPic
+{
     padding: 5px;
     height: 100%;
 }
-.card{
+
+.card
+{
     margin: 25px; !important;
     background-color: #efb0a9 !important;
 }
 
-
-.list-group{
+.list-group
+{
     background-color: #efb0a9 !important;
 }
-.card-text{
+
+.card-text
+{
     font-size: 15px !important;
     font-weight: bold;
 }
-#about{
+
+#about
+{
     font-size: 35px;
     text-align: center;
     margin-top: 15px;
     font-family: fantasy;
 }
-#orderButton{
 
+#orderButton
+{
     font-family: "Comic Sans MS", serif ;
 }
-.btn{
+
+.btn
+{
      background-color:#efb0a9  !important;
  }
-.nav-link {
+
+.nav-link
+{
    font-family: fantasy;
     margin: 10px;
 }
-#homeBody,#orderBody,#checkoutBody{
+
+#homeBody,#orderBody,#checkoutBody,#loginBody
+{
     background-color: #f3b584;
     min-width: fit-content;
     width: 100% !important;
 }
-#aboutUsText{
+
+#aboutUsText
+{
     font-weight: bold;
     font-family: fantasy;
 }
-#rightColum,#leftColum{
+
+#rightColum,#leftColum
+{
     min-width: 350px;
 }
-.navbar{
+
+.navbar
+{
     min-width: fit-content;
 }
-.navbar-nav,.navbar,#navbar-nav{
+
+.navbar-nav,.navbar,#navbar-nav
+{
     background-color: white;
     min-width: fit-content;
 }
-#apps,#rolls{
+
+#apps,#rolls
+{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
     padding-top: 10px;
 }
-#sushiOrder{
+
+#sushiOrder
+{
     margin-top: 25px;
 }
-#orderOptions{
+
+#orderOptions
+{
     margin-top:50px;
 }
-#nextButtonContainer{
+
+#nextButtonContainer
+{
    padding-top: 25px;
 }
-.checkoutCard{
+
+.checkoutCard
+{
+    align-self: center;
+}
+
+#loginCard
+{
+    align-self: center;
+    width: 30rem;
+    height: 30rem;
+}
+
+#loginTitle
+{
+    align-self: center;
+    padding: 33px;
+}
+
+#username,#password,#loginForm
+{
+    margin:10px;
     align-self: center;
 }

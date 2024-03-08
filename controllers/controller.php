@@ -25,11 +25,24 @@ class Controller
         // If the form has been posted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $selectedRolls = $this->_f3->get('POST.roll');
+            $selectedApps = $this->_f3->get('POST.appetizer');
             $totalPrice = 0;
 
             // Validate the data
             if (isset($_POST['appetizer'])) {
                 $app = implode(", ", $_POST['appetizer']);
+                $appPrices = menuData::getAppetizer();
+                // Iterate through selected rolls
+                foreach ($selectedApps as $selectedApp) {
+                    // Find the selected roll in the rolls data
+                    foreach ($appPrices as $appPrice) {
+                        if ($selectedApp === $appPrice['appname']) {
+                            // Add the price of the selected roll to the total balance
+                            $totalPrice += $appPrice['price'];
+                        }
+                    }
+
+                }
             } else {
                 $app = "None selected";
             }
@@ -49,17 +62,6 @@ class Controller
             } else {
                 $rolls = "None selected";
             }
-
-
-            // calculating appetizer
-            if(isset($_POST['appetizer'])){
-                foreach ($_POST['appetizer'] as $appetizer){
-                    if (isset($price[$appetizer])){
-                        $totalPrice = $totalPrice + $price[$appetizer];
-                    }
-                }
-            }
-
 
 
             // Put the data in the session array

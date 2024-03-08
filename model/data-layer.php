@@ -24,6 +24,11 @@ class menuData
     }
 
 
+    /**
+     *check if a member has logged in
+     * @param password $passwordData
+     *
+     */
     function checkLogin()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -67,6 +72,9 @@ class menuData
         }
     }
 
+    /**
+     * @return array[] of appetizer values
+     */
     static function getAppetizer()
     {   return array(
             array(
@@ -108,7 +116,10 @@ class menuData
         );
     }
 
-   static function getRolls()
+    /**
+     * @return array[] of roll values
+     */
+    static function getRolls()
     {
         return array(
             array(

@@ -68,8 +68,44 @@ class menuData
     }
 
     static function getAppetizer()
-    {
-        return array('Gyoza', 'Edamame', 'Green beans', 'Sashimi', 'Ajitama', 'Miso soup');
+    {   return array(
+            array(
+                'appname' => 'Gyoza',
+                'image' => 'Gyoza.jpeg',
+                'price' => 7.99,
+                'description' => 'Pan-fried Japanese dumplings filled with pork and vegetables.'
+            ),
+            array(
+                'appname' => 'Edamame',
+                'image' => 'edamame.jpeg',
+                'price' => 4.99,
+                'description' => 'Steamed young soybeans sprinkled with sea salt.'
+            ),
+            array(
+                'appname' => 'Green beans',
+                'image' => 'greenbean.jpeg',
+                'price' => 6.99,
+                'description' => 'Blanched green beans served with a savory sesame dressing.'
+            ),
+            array(
+                'appname' => 'Sashimi',
+                'image' => 'sashimi.jpeg',
+                'price' => 12.99,
+                'description' => 'Assorted slices of fresh raw fish served with soy sauce and wasabi.'
+            ),
+            array(
+                'appname' => 'Ajitama',
+                'image' => 'ajitama.jpeg',
+                'price' => 3.99,
+                'description' => 'Seasoned soft-boiled egg marinated in soy sauce and mirin.'
+            ),
+            array(
+                'appname' => 'Miso soup',
+                'image' => 'miso.jpeg',
+                'price' => 4.99,
+                'description' => 'Traditional Japanese soup made with miso paste, tofu, seaweed, and green onions.'
+            )
+        );
     }
 
    static function getRolls()

@@ -49,6 +49,8 @@ class Controller
 
     function menu()
     {
+        $this->_f3->set('appetizer', menuData::getAppetizer());
+        $this->_f3->set('roll', menuData::getRolls());
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/menu.html');

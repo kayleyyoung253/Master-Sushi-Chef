@@ -148,7 +148,7 @@ class menuData
                 'description' => 'Shrimp, tobiko, and cucumber, topped with salmon, onion and garlic sauce.'
             )
         );
-     //   return array('California roll', 'Spicy tuna roll', 'Seattle roll', 'Master roll', 'New york roll', 'Dragon roll');
+
     }
 
 }

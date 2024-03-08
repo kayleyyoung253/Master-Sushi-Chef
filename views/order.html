@@ -1,3 +1,6 @@
+<!-- Levi Miller, Kayley Young -->
+<!-- 2/25/24 -->
+<!-- order.html: order form visual page for Master Sushi Chef -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,30 +19,34 @@
                 <repeat group="{{ @appetizer }}" value="{{ @item }}">
                     <label class="col-4 my-2">
                         <img src="images/{{ @item['image'] }}" class="img-fluid rounded-5"  alt="{{ ucwords(@item['appname']) }}" height="400" width="400">
-                        <h3 class="mt-2">{{ ucwords(@item['appname']) }}</h3>
-                        <input type="checkbox" name="appetizer[]" id="{{ @item['appname'] }}" value="{{ @item['appname'] }}" >
+                        <h3 class="mt-2">
+                            <input type="checkbox" name="appetizer[]" id="{{ @item['appname'] }}" value="{{ @item['appname'] }}" >
+                            {{ ucwords(@item['appname']) }}
+                        </h3>
                         <p>Price: ${{ @item['price'] }}</p>
-                        <p>Description: {{ @item['description'] }}</p>
+
                     </label>
                 </repeat>
             </div>
         </div>
-        <h2 id="sushiOrder">Sushi Rolls</h2>
+        <h2 id="sushiOrder"><b>Sushi Rolls</b></h2>
         <label class="container" id="rolls">
             <div class="row">
                 <repeat group="{{ @roll }}" value="{{ @item }}">
                     <label class="col-4 my-2">
                         <img src="images/{{ @item['image'] }}" class="img-fluid rounded-5" alt="{{ ucwords(@item['name']) }}" width="400" >
-                        <h3 class="mt-2">{{ ucwords(@item['name']) }}</h3>
-                        <input type="checkbox" name="roll[]" id="{{ @item['name'] }}" value="{{ @item['name'] }}">
+                        <h3>
+                            <input type="checkbox" name="roll[]" id="{{ @item['name'] }}" value="{{ @item['name'] }}">
+                            {{ ucwords(@item['name']) }}
+                        </h3>
                         <p>Price: ${{ @item['price'] }}</p>
-                        <p>Description: {{ @item['description'] }}</p>
+
                     </label>
                 </repeat>
             </div>
         </label>
 
-        <div class="col-md-auto" id="nextButtonContainer">
+        <div class="d-grid gap-2 col-6 mx-auto" id="nextButtonContainer">
             <button type="submit" id="nextButton" class="btn btn-primary">Check Out</button>
         </div>
     </form>

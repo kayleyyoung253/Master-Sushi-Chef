@@ -1,15 +1,44 @@
 <!-- Levi Miller, Kayley Young -->
 <!-- 2/25/24 -->
 <!-- menu.html: menu visual page for Master Sushi Chef -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <include href="views/header.html" />
+    <meta charset="UTF-8">
+    <title>Menu Options</title>
+</head>
 
-<include href="views/header.html" />
-
-<body>
+<body  id="orderBody">
 <include href="views/NavBar.html"/>
-<body>
-<div class="container">
-    <div class="card">
-        <h2>menu</h2>
 
+    <div class="container" id="orderOptions">
+        <h2><b>Appetizers</b></h2>
+        <div class="container" id="apps">
+            <div class="row">
+                <repeat group="{{ @appetizer }}" value="{{ @item }}">
+                    <div class="col-4 my-2">
+                        <img src="images/{{ @item['image'] }}" class="img-fluid rounded-5"  alt="{{ ucwords(@item['appname']) }}"  width="200">
+                        <h3>{{ ucwords(@item['appname']) }}</h3>
+                        <p>Price: ${{ @item['price'] }}</p>
+                        <p>Description: {{ @item['description'] }}</p>
+                    </div>
+                </repeat>
+            </div>
+        </div>
+        <h2 id="sushiOrder"><b>Sushi Rolls</b></h2>
+        <div class="container" id="rolls">
+            <div class="row">
+                <repeat group="{{ @roll }}" value="{{ @item }}">
+                    <label class="col-4 my-2">
+                        <img src="images/{{ @item['image'] }}" class="img-fluid rounded-5" alt="{{ ucwords(@item['name']) }}" width="200" >
+                        <h3>{{ ucwords(@item['name']) }}</h3>
+                        <p>Price: ${{ @item['price'] }}</p>
+                        <p>Description: {{ @item['description'] }}</p>
+                    </label>
+                </repeat>
+            </div>
+        </div>
     </div>
-</div>
+</body>
+</html>

@@ -36,49 +36,6 @@ $f3->route('GET /', function() {
 //Define a default route-invoking route method
 $f3->route('GET|POST /order', function($f3) {
 
-    // If the form has been posted
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-        // Validate the data
-        if (isset($_POST['appetizer'])) {
-            $app = implode(", ", $_POST['appetizer']);
-        } else {
-            $app = "None selected";
-        }
-        if (isset($_POST['roll'])) {
-            $roll = implode(", ", $_POST['roll']);
-        } else {
-            $roll = "None selected";
-        }
-
-        $totalPrice = 0;
-        // calculating appetizer
-        if(isset($_POST['appetizer'])){
-            foreach ($_POST['appetizer'] as $appetizer){
-                if (isset($price[$appetizer])){
-                    $totalPrice = $totalPrice + $price[$appetizer];
-                }
-            }
-        }
-        // calculating rolls
-        if(isset($_POST['roll'])){
-            foreach ($_POST['roll'] as $selectedRoll){
-                if(isset($price[$selectedRoll])) {
-                   echo $totalPrice = $totalPrice + $price[$selectedRoll];
-                }
-            }
-        }
-
-
-        // Put the data in the session array
-        $f3->set('SESSION.app', $app);
-        $f3->set('SESSION.roll', $roll);
-        $f3->set('SESSION.totalPrice', $totalPrice);
-
-        // Redirect to summary route
-        $f3->reroute('checkout');
-    }
-
     $GLOBALS['con']->order();
 });
 

@@ -22,6 +22,55 @@ class Controller
     }
     function order()
     {
+        // If the form has been posted
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $selectedRolls = $this->_f3->get('POST.roll');
+            $totalPrice = 0;
+
+            // Validate the data
+            if (isset($_POST['appetizer'])) {
+                $app = implode(", ", $_POST['appetizer']);
+            } else {
+                $app = "None selected";
+            }
+            if (isset($_POST['roll'])) {
+                $rolls= implode(", ", $_POST['roll']);
+                $rollprices = menuData::getRolls();
+                // Iterate through selected rolls
+                foreach ($selectedRolls as $selectedRoll) {
+                    // Find the selected roll in the rolls data
+                    foreach ($rollprices as $rollprice) {
+                        if ($selectedRoll === $rollprice['name']) {
+                            // Add the price of the selected roll to the total balance
+                            $totalPrice += $rollprice['price'];
+                        }
+                    }
+                }
+            } else {
+                $rolls = "None selected";
+            }
+
+
+            // calculating appetizer
+            if(isset($_POST['appetizer'])){
+                foreach ($_POST['appetizer'] as $appetizer){
+                    if (isset($price[$appetizer])){
+                        $totalPrice = $totalPrice + $price[$appetizer];
+                    }
+                }
+            }
+
+
+
+            // Put the data in the session array
+            $this->_f3->set('SESSION.app', $app);
+            $this->_f3->set('SESSION.roll', $rolls);
+            $this->_f3->set('SESSION.totalPrice', $totalPrice);
+
+            // Redirect to summary route
+            $this->_f3->reroute('checkout');
+        }
+
         $this->_f3->set('appetizer', menuData::getAppetizer());
         $this->_f3->set('roll', menuData::getRolls());
         //display a view page

@@ -51,6 +51,10 @@ $f3->route('GET|POST /login', function() {
     $GLOBALS['con']->login();
 });
 
+//Define a default route to menu
+$f3->route('GET|POST /makeAnAccount', function() {
+    $GLOBALS['con']->makeAccount();
+});
 
 //Define a default route to menu
 $f3->route('GET /menu', function() {

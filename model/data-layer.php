@@ -33,44 +33,61 @@ class menuData
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-            if (isset($_POST['username'])) {
+            if (isset($_POST['username']) && isset($_POST['password'])) {
 
-                $username = $_POST['username'];
+                $usernameData = $_POST['username'];
+                $passwordData = $_POST['password'];
+
                 // define the query
                 $sql = "SELECT * FROM users WHERE username = :username";
+
                 // prepare the statement
                 $statement = $this->_dbh->prepare($sql);
 
+                //bind the parameter
+                $statement->bindParam(':username', $usernameData);
 
                 // execute
                 $statement->execute();
                 // process the results
-                $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $user = $statement->fetch(PDO::FETCH_ASSOC);
 
-                if (isset($_POST['password'])) {
-
-                    $passwordData = $_POST['password'];
-                    // define the query
-                    $sqlPass = "SELECT * FROM users WHERE password";
-                    // prepare the statement
-                    $statement = $this->_dbh->prepare($sqlPass);
-                    // execute
-                    $statement->execute();
-                    // process the results
-                    $resultPass = $statement->fetchAll(PDO::FETCH_ASSOC);
-
-                    if ($sql == $result && $passwordData == $resultPass) {
-                        echo 'All logged in';
-                    } else{
-                        echo $result . " " . $resultPass;
-                    }
-
-
+                if ($user['password'] == $passwordData && $user['username'] == $usernameData) {
+                    echo 'Logged in !';
+                } else {
+                    echo $usernameData . $user['username'];
                 }
-
+            } else {
+                    echo "Username or Password not found";
+                }
             }
         }
-    }
+
+
+        function createAccount(){
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                if (isset($_POST['username']) && isset($_POST['password'])) {
+
+                    $usernameData = $_POST['username'];
+                    $passwordData = $_POST['password'];
+
+                    // define the query
+                    $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+
+                    // prepare the statement
+                    $statement = $this->_dbh->prepare($sql);
+
+                    // Bind parameters
+                    $statement->bindParam(':username',$usernameData);
+                    $statement->bindParam(':password',$passwordData);
+
+                    // Execute the statement
+                    $statement->execute();
+
+                }
+            }
+        }
+
 
     /**
      * @return array[] of appetizer values

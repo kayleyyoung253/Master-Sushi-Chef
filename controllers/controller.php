@@ -80,13 +80,24 @@ class Controller
         echo $view->render('views/order.html');
     }
 
+    function makeAccount()
+    {
+//        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+//            $this->_f3->reroute('login');
+//        }
+        $menuData = new MenuData;
+        $menuData->createAccount();
+        //display a view page
+        $view = new Template();// template is a class from fat-free
+        echo $view->render('views/makeAccount.html');
+    }
+
     function checkout()
     {
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/checkout.html');
     }
-
 
     function login()
     {

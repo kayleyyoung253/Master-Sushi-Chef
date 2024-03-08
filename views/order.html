@@ -11,34 +11,36 @@
 <div class="container" id="orderOptions">
     <h2>Appetizers</h2>
     <form action="#" method="post">
-    <div class="container" id="apps">
-    <repeat group="{{ @appetizer }}" value=" {{ @appetizers }}">
-    <label>
-        <input type="checkbox"
-               name="appetizer[]"
-               id="{{ @appetizers }}"
-               value="{{ @appetizers }}"
-        > {{ ucwords(@appetizers) }}
-        </input>
-    </label><br>
-    </repeat>
-    </div>
-    <h2 id="sushiOrder">Sushi Rolls</h2>
-    <div class="container" id="rolls">
-        <repeat group="{{ @roll }}" value=" {{ @rolls }}">
+        <div class="container" id="apps">
+            <repeat group="{{ @appetizer }}" value=" {{ @appetizers }}">
             <label>
                 <input type="checkbox"
-                       name="roll[]"
-                       id="{{ @rolls }}"
-                       value="{{ @rolls }}"
-                > {{ ucwords(@rolls) }}
+                       name="appetizer[]"
+                       id="{{ @appetizers }}"
+                       value="{{ @appetizers }}"
+                > {{ ucwords(@appetizers) }}
                 </input>
             </label><br>
-        </repeat>
-    </div>
+            </repeat>
+        </div>
+        <h2 id="sushiOrder">Sushi Rolls</h2>
+        <label class="container" id="rolls">
+            <div class="row">
+                <repeat group="{{ @roll }}" value="{{ @item }}">
+                    <label class="col-4 my-2">
+                        <img src="images/{{ @item['image'] }}" class="rounded-5" alt="{{ ucwords(@item['name']) }}" width="400" >
+                        <h3 class="mt-2">{{ ucwords(@item['name']) }}</h3>
+                        <input type="checkbox" name="roll[]" id="{{ @item['name'] }}" value="{{ @item['name'] }}">
+                        <p>Price: ${{ @item['price'] }}</p>
+                        <p>Description: {{ @item['description'] }}</p>
+                    </label>
+                </repeat>
+            </div>
+        </label>
+
         <div class="col-md-auto" id="nextButtonContainer">
-        <button type="submit" id="nextButton" class="btn btn-primary">Check Out</button>
-    </div>
+            <button type="submit" id="nextButton" class="btn btn-primary">Check Out</button>
+        </div>
     </form>
 </div>
 </body>

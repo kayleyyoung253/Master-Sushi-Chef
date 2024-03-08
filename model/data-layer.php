@@ -72,9 +72,47 @@ class menuData
         return array('Gyoza', 'Edamame', 'Green beans', 'Sashimi', 'Ajitama', 'Miso soup');
     }
 
-    static function getRolls()
+   static function getRolls()
     {
-        return array('California roll', 'Spicy tuna roll', 'Seattle roll', 'Master roll', 'New york roll', 'Dragon roll');
+        return array(
+            array(
+                'name' => 'California roll',
+                'image' => 'Cali.jpeg',
+                'price' => 8.99,
+                'description' => 'Fresh crab meat, cream cheese, and avocado, wrapped in sushi rice and seaweed.'
+            ),
+            array(
+                'name' => 'Spicy tuna roll',
+                'image' => 'SpicyTuna.jpeg',
+                'price' => 10.99,
+                'description' => 'Tuna mixed with spicy mayo, cucumber, and scallions, wrapped in sushi rice and seaweed.'
+            ),
+            array(
+                'name' => 'Seattle roll',
+                'image' => 'Seattle.jpeg',
+                'price' => 9.99,
+                'description' => 'Salmon, cream cheese, and cucumber, rolled in sushi rice and seaweed.'
+            ),
+            array(
+                'name' => 'Master roll',
+                'image' => 'MasterRoll.jpeg',
+                'price' => 12.99,
+                'description' => 'A signature roll with a blend of fresh crab, tobiko, and avocado, topped with eel and eel sauce.'
+            ),
+            array(
+                'name' => 'New york roll',
+                'image' => 'NewYork.jpeg',
+                'price' => 11.99,
+                'description' => 'cream cheese and cucumber, topped with salmon.'
+            ),
+            array(
+                'name' => 'Dragon roll',
+                'image' => 'dragonroll.jpg',
+                'price' => 13.99,
+                'description' => 'Shrimp, tobiko, and cucumber, topped with salmon, onion and garlic sauce.'
+            )
+        );
+     //   return array('California roll', 'Spicy tuna roll', 'Seattle roll', 'Master roll', 'New york roll', 'Dragon roll');
     }
 
 }

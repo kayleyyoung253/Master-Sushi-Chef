@@ -4,6 +4,7 @@ data-layer.php: data for menu
 */
 require_once('model/data-layer.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/../MSCDB.php');
+require_once ('classes/user.php');
 
 class menuData
 {
@@ -13,7 +14,7 @@ class menuData
      * datalayer constructor
      */
 
-     function __construct()
+    function __construct()
     {
         try {
             // instantiate a PDO database connection object
@@ -46,7 +47,7 @@ class menuData
 
                 //bind the parameter
                 $statement->bindParam(':username', $usernameData);
-                $statement->bindParam(':password',$passwordData);
+                $statement->bindParam(':password', $passwordData);
 
                 // execute
                 $statement->execute();
@@ -54,48 +55,88 @@ class menuData
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
                 if ($user['password'] == $passwordData && $user['username'] == $usernameData) {
-                     return $usernameData;
+                        $userObj = new user($user['id'], $usernameData, $passwordData);
+                    return $userObj;
 
                 } else {
                     echo $user;
                 }
             } else {
-                    echo "Username or Password not found";
-                }
+                echo "Username or Password not found";
             }
         }
+        return 0;
+    }
 
 
-        function createAccount(){
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                if (isset($_POST['username']) && isset($_POST['password'])) {
+    function createAccount()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if (isset($_POST['username']) && isset($_POST['password'])) {
 
-                    $usernameData = $_POST['username'];
-                    $passwordData = $_POST['password'];
+                $usernameData = $_POST['username'];
+                $passwordData = $_POST['password'];
 
-                    // define the query
-                    $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+                // define the query
+                $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
 
-                    // prepare the statement
-                    $statement = $this->_dbh->prepare($sql);
+                // prepare the statement
+                $statement = $this->_dbh->prepare($sql);
 
-                    // Bind parameters
-                    $statement->bindParam(':username',$usernameData);
-                    $statement->bindParam(':password',$passwordData);
+                // Bind parameters
+                $statement->bindParam(':username', $usernameData);
+                $statement->bindParam(':password', $passwordData);
 
-                    // Execute the statement
-                    $statement->execute();
+                // Execute the statement
+                $statement->execute();
 
-                }
             }
         }
+    }
 
+
+    function saveOrder($orders, $user_id){
+
+        // define the query
+        $sql = "INSERT INTO orders (user_id, rolls, app, totalPrice) VALUES (:user_id, :rolls, :app, :totalPrice)";
+
+        // prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // Bind the parameters
+        $statement->bindParam(':user_id',$user_id);
+        $statement->bindParam(':rolls',$orders->getRolls());
+        $statement->bindParam(':app',$orders->getApp());
+        $statement->bindParam(':totalPrice',$orders->getTotalPrice());
+
+        // Execute the statement
+        $statement->execute();
+
+        return $statement;
+    }
+
+    function loadOrders($user_id) {
+        $sql = "SELECT * FROM orders WHERE user_id = :id";
+
+        // prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // bind the parameter
+        $statement->bindParam(':id', $user_id);
+
+        // execute
+        $statement->execute();
+        // process the results
+        $orders = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $orders;
+    }
 
     /**
      * @return array[] of appetizer values
      */
     static function getAppetizer()
-    {   return array(
+    {
+        return array(
             array(
                 'appname' => 'Gyoza',
                 'image' => 'Gyoza.jpeg',

@@ -4,7 +4,9 @@
  * the controller class for MasterSushi Chef
  *
  */
-require_once ('model/data-layer.php');
+require_once('model/data-layer.php');
+require_once('classes/order.php');
+
 class Controller
 {
     private $_f3; //Fat-free router
@@ -20,8 +22,15 @@ class Controller
         $view = new Template();
         echo $view->render('views/homePage.html');
     }
+
     function order()
     {
+        $user = $this->_f3->get('SESSION.user');
+        if ($user != null) {
+            echo "Logged in user";
+        } else {
+            echo "Not logged in";
+        }
         // If the form has been posted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $selectedRolls = $this->_f3->get('POST.roll');
@@ -47,7 +56,7 @@ class Controller
                 $app = "None selected";
             }
             if (isset($_POST['roll'])) {
-                $rolls= implode(", ", $_POST['roll']);
+                $rolls = implode(", ", $_POST['roll']);
                 $rollprices = menuData::getRolls();
                 // Iterate through selected rolls
                 foreach ($selectedRolls as $selectedRoll) {
@@ -69,6 +78,11 @@ class Controller
             $this->_f3->set('SESSION.roll', $rolls);
             $this->_f3->set('SESSION.totalPrice', $totalPrice);
 
+            $orders = new Orders($rolls, $app, $totalPrice);
+            // Put the object in the session array
+            $this->_f3->set('SESSION.orders', $orders);
+            $menuData = new MenuData;
+            $menuData->saveOrder($this->_f3->get('SESSION.orders'), $user->getId());
             // Redirect to summary route
             $this->_f3->reroute('checkout');
         }
@@ -80,8 +94,7 @@ class Controller
         echo $view->render('views/order.html');
     }
 
-    function makeAccount()
-    {
+    function makeAccount() {
 //        if($_SERVER['REQUEST_METHOD'] == 'POST') {
 //            $this->_f3->reroute('login');
 //        }
@@ -92,18 +105,45 @@ class Controller
         echo $view->render('views/makeAccount.html');
     }
 
-    function checkout()
-    {
+    function checkout() {
+        $user = $this->_f3->get('SESSION.user');
+        if ($user != null) {
+            echo "Logged in user";
+        } else {
+            echo "Not logged in";
+        }
+
+        if ($user != null) {
+            // param i
+            echo "HI";
+            $menuData = new MenuData();
+            $orders = $menuData->loadOrders($user->getId());
+            // Process the result array
+            foreach ($orders as $row) {
+                // Access individual columns using array keys
+                echo "Order ID: " . $row['order_id'] . " Rolls: " . $row['rolls']
+                    . " Apps: " . $row['apps'] . " Total: $" . $row['totalPrice'] . "<br>";
+            }
+        }
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/checkout.html');
+
     }
 
     function login()
     {
         $menuData = new MenuData;
-        $username = $menuData->checkLogin();
-        $this->_f3->set('SESSION.usernameData', $username);
+        $user = $menuData->checkLogin();
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($user instanceof user) {
+                $this->_f3->set('SESSION.user', $user);
+                echo "Logged in";
+            } else {
+                echo "Login error";
+            }
+        }
+
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/login.html');

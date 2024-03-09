@@ -1,5 +1,5 @@
 <?php
-class order
+class orders
 {
 
     private $_rolls;
@@ -9,15 +9,15 @@ class order
     private $_totalPrice;
 
     /**
-     * @param $_rolls
-     * @param $_app
-     * @param $_totalPrice
+     * @param $rolls
+     * @param $app
+     * @param $totalPrice
      */
-    public function __construct($_rolls, $_app, $_totalPrice)
+    public function __construct($rolls, $app, $totalPrice)
     {
-        $this->_rolls = $_rolls;
-        $this->_app = $_app;
-        $this->_totalPrice = $_totalPrice;
+        $this->_rolls = $rolls;
+        $this->_app = $app;
+        $this->_totalPrice = $totalPrice;
     }
 
     /**

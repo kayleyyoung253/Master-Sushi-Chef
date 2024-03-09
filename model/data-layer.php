@@ -39,13 +39,14 @@ class menuData
                 $passwordData = $_POST['password'];
 
                 // define the query
-                $sql = "SELECT * FROM users WHERE username = :username";
+                $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
 
                 // prepare the statement
                 $statement = $this->_dbh->prepare($sql);
 
                 //bind the parameter
                 $statement->bindParam(':username', $usernameData);
+                $statement->bindParam(':password',$passwordData);
 
                 // execute
                 $statement->execute();
@@ -53,9 +54,10 @@ class menuData
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
                 if ($user['password'] == $passwordData && $user['username'] == $usernameData) {
-                    echo 'Logged in !';
+                     return $usernameData;
+
                 } else {
-                    echo $usernameData . $user['username'];
+                    echo $user;
                 }
             } else {
                     echo "Username or Password not found";

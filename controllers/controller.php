@@ -102,7 +102,8 @@ class Controller
     function login()
     {
         $menuData = new MenuData;
-        $menuData->checkLogin();
+        $username = $menuData->checkLogin();
+        $this->_f3->set('SESSION.usernameData', $username);
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/login.html');

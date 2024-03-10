@@ -48,6 +48,12 @@ $f3->route('GET|POST /login', function() {
 });
 
 //Define a default route to menu
+$f3->route('GET /rewards', function() {
+    $GLOBALS['con']->rewards();
+});
+
+
+//Define a default route to menu
 $f3->route('GET|POST /makeAnAccount', function() {
     $GLOBALS['con']->makeAccount();
 });

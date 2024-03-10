@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <include href="views/header.html"/>
+    <title>Rewards</title>
+    <include href="views/NavBar.html"/>
+</head>
+<body id="rewardsBody">
+
+
+<repeat group="{{ @SESSION.userOrders }}" value="{{ @row }}">
+    <li>{{ @row['order_id'] }},</li>
+</repeat>
+</body>
+</html>

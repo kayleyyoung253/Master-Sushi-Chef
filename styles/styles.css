@@ -52,7 +52,7 @@
     margin: 10px;
 }
 
-#homeBody,#orderBody,#checkoutBody,#loginBody
+#homeBody,#orderBody,#checkoutBody,#loginBody,#rewardsBody
 {
     background-color: #f3b584;
     min-width: fit-content;

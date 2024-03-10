@@ -94,7 +94,8 @@ class Controller
         echo $view->render('views/order.html');
     }
 
-    function makeAccount() {
+    function makeAccount()
+    {
 //        if($_SERVER['REQUEST_METHOD'] == 'POST') {
 //            $this->_f3->reroute('login');
 //        }
@@ -105,7 +106,8 @@ class Controller
         echo $view->render('views/makeAccount.html');
     }
 
-    function checkout() {
+    function checkout()
+    {
         $user = $this->_f3->get('SESSION.user');
         if ($user != null) {
             echo "Logged in user";
@@ -117,12 +119,14 @@ class Controller
             // param i
             echo "HI";
             $menuData = new MenuData();
-            $orders = $menuData->loadOrders($user->getId());
-            // Process the result array
-            foreach ($orders as $row) {
-                // Access individual columns using array keys
-                echo "Order ID: " . $row['order_id'] . " Rolls: " . $row['rolls']
-                    . " Apps: " . $row['apps'] . " Total: $" . $row['totalPrice'] . "<br>";
+            if ($user instanceof user) {
+                $orders = $menuData->loadOrders($user->getId());
+                // Process the result array
+                foreach ($orders as $row) {
+                    // Access individual columns using array keys
+                    echo "Order ID: " . $row['order_id'] . " Rolls: " . $row['rolls']
+                        . " Apps: " . $row['apps'] . " Total: $" . $row['totalPrice'] . "<br>";
+                }
             }
         }
         //display a view page
@@ -147,6 +151,31 @@ class Controller
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/login.html');
+    }
+
+
+    function rewards()
+    {
+
+        $user = $this->_f3->get('SESSION.user');
+        if ($user != null) {
+            // param
+            echo "HI";
+            $menuData = new MenuData();
+            if ($user instanceof user) {
+                $orders = $menuData->loadOrders($user->getId());
+                $this->_f3->set('SESSION.userOrders', $orders);
+                // Process the result array
+                foreach ($orders as $row) {
+                    // Access individual columns using array keys
+                    echo "Order ID: " . $row['order_id'] . " Rolls: " . $row['rolls']
+                        . " Apps: " . $row['app'] . " Total: $" . $row['totalPrice'] . "<br>";
+                }
+            }
+        }
+        //display a view page
+        $view = new Template();// template is a class from fat-free
+        echo $view->render('views/rewards.html');
     }
 
 

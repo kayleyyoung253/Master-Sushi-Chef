@@ -117,7 +117,6 @@ class Controller
 
         if ($user != null) {
             // param i
-            echo "HI";
             $menuData = new MenuData();
             if ($user instanceof user) {
                 $orders = $menuData->loadOrders($user->getId());
@@ -154,23 +153,17 @@ class Controller
     }
 
 
+
     function rewards()
     {
 
         $user = $this->_f3->get('SESSION.user');
         if ($user != null) {
             // param
-            echo "HI";
             $menuData = new MenuData();
             if ($user instanceof user) {
                 $orders = $menuData->loadOrders($user->getId());
                 $this->_f3->set('SESSION.userOrders', $orders);
-                // Process the result array
-                foreach ($orders as $row) {
-                    // Access individual columns using array keys
-                    echo "Order ID: " . $row['order_id'] . " Rolls: " . $row['rolls']
-                        . " Apps: " . $row['app'] . " Total: $" . $row['totalPrice'] . "<br>";
-                }
             }
         }
         //display a view page

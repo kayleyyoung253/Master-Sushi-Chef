@@ -6,10 +6,12 @@
     <include href="views/NavBar.html"/>
 </head>
 <body id="rewardsBody">
-
-
-<repeat group="{{ @SESSION.userOrders }}" value="{{ @row }}">
-    <li>{{ @row['order_id'] }},</li>
+<div class="container" id="pastOrders">
+<h2>Past Orders</h2>
+    <hr>
+<repeat group="{{ @SESSION.userOrders }}" value="{{ @row }}" >
+    <p> Order ID: {{ @row['order_id'] }}, Rolls: {{ @row['rolls'] }}, Appetizers: {{ @row['app'] }}, Total: {{ @row['totalPrice'] }}</p>
 </repeat>
+</div>
 </body>
 </html>

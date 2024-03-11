@@ -12,19 +12,6 @@ $con = new Controller($f3);
 $menuData = new MenuData();
 
 
-$price = array(
-    'Gyoza' => 5.99,
-    'Edamame' => 3.99,
-    'Green beans' => 3.99,
-    'Sashimi' => 24.99,
-    'Ajitama' => 3.99,
-    'Miso soup' => 4.99,
-    'California roll' => 8.99,
-    'Spicy tuna roll' => 8.99,
-    'Seattle roll' => 11.99,
-    'New york roll' => 13.99,
-    'Dragon roll' => 12.99
-);
 
 //Define a default route-invoking route method
 $f3->route('GET /', function() {

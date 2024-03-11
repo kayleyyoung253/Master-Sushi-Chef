@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /**
  * the controller class for MasterSushi Chef
  *
@@ -136,16 +136,37 @@ class Controller
 
     function login()
     {
-        $menuData = new MenuData;
-        $user = $menuData->checkLogin();
+
+        // Check if the form is submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if ($user instanceof user) {
-                $this->_f3->set('SESSION.user', $user);
-                echo "Logged in";
-            } else {
-                echo "Login error";
+            // Handle logout first
+            if (isset($_POST['logout'])) {
+                // Check if the session is set before destroying it
+                if (isset($_SESSION['user'])) {
+                    session_destroy();
+                    $_SESSION['user'] = null; // Reset user session
+                    $this->_f3->reroute('login'); //Redirect to login page
+                    exit;
+                }
+            }
+            // Handle login
+            elseif (isset($_POST['login'])) {
+                // Check if both username and password fields are provided
+                if (!empty($_POST['username']) && !empty($_POST['password'])) {
+                    $menuData = new MenuData;
+                    $user = $menuData->checkLogin();
+                    if ($user instanceof user) {
+                        $_SESSION['user'] = $user;
+                        echo "Logged in";
+                    } else {
+                        $this->_f3->set('errors["login"]', "invalid input");;
+                    }
+                } else {
+                    $this->_f3->set('errors["login"]', "Input required");;
+                }
             }
         }
+
 
         //display a view page
         $view = new Template();// template is a class from fat-free

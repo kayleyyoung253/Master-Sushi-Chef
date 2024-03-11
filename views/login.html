@@ -15,11 +15,24 @@
     <h2 id="loginTitle">Login</h2>
     <form action="#" method="post" id="loginForm">
         <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br>
+        <input type="text" id="username" name="username"><br>
         <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <input type="submit" value="Login">
-        <button>Logout</button>
+        <input type="password" id="password" name="password"><br>
+        <!-- validate the user input -->
+        <div class="text-center">
+            <check if="{{ isset(@errors['login']) }}">
+                <span class="err">{{ @errors['login'] }}</span>
+            </check>
+        </div>
+        <div class="text-center"> <!-- Center the button -->
+            <check if="{{ @SESSION['user'] == null }}">
+                <input type="submit" name="login" value="Login">
+            </check>
+            <check if="{{ @SESSION['user'] !== null }}">
+                <input type="submit" name="logout" value="Logout">
+            </check>
+        </div>
+
         <div>
         <a class="btn nav-link" href="makeAnAccount" id="startAccountButton">Start An Account</a>
 </div>

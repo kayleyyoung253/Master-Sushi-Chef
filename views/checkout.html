@@ -1,3 +1,4 @@
+
 <!-- Levi Miller, Kayley Young -->
 <!-- 2/25/24 -->
 <!-- checkout.html: order summary page for Master Sushi Chef -->
@@ -12,21 +13,54 @@
 <include href="views/NavBar.html"/>
 <div class="container">
     <div class="card"><h3 class="checkoutCard"> Checkout</h3>
-<div class="row">
-    <div class="col-6">
-        <ul class="list-group">
-    <li class="list-group-item">Rolls: {{ @SESSION.orders->getRolls() }}</li>
-    <li class="list-group-item">Appetizers: {{ @SESSION.orders->getApp() }}</li>
-</ul>
+        <div class="row">
+            <div class="col-6">
+                <ul class="list-group">
+                    <li class="list-group-item">Rolls: {{ @SESSION.orders->getRolls() }}</li>
+                    <li class="list-group-item">Appetizers: {{ @SESSION.orders->getApp() }}</li>
+                </ul>
+            </div>
+            <div class="col-6">
+                <ul class="list-group">
+                    <li class="list-group-item">Rewards earned: </li>
+                    <li class="list-group-item">Total: {{ @SESSION.orders->getTotalPrice() }}</li>
+                </ul>
+            </div>
+        </div>
     </div>
-    <div class="col-6">
-        <ul class="list-group">
-            <li class="list-group-item">Rewards earned: </li>
-            <li class="list-group-item">Total: {{ @SESSION.orders->getTotalPrice() }}</li>
-        </ul>
-    </div>
-</div>
-</div>
+    <check if="{{ @SESSION['user'] !== null }}">
+        <div class="text-center">
+            <a href="#" class="btn btn-light col-6 ">Place Order</a>
+        </div>
+    </check>
+    <check if="{{ @SESSION['user'] == null }}">
+        <div class="text-center my-5">
+            <p> <a href="login" class="btn btn-light col-4 mx-3">Log in</a> <a href="makeAnAccount" class="btn btn-light col-4 mx-3">Sign Up</a></p>
+        </div>
+
+        <div class="card mt-5" id="guestForm">
+            <h3 class="checkoutCard">Checkout as Guest</h3>
+            <form action="#" method="post">
+                <div class="row justify-content-center">
+                    <div class="col-10 my-2 p-1">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" name="phone" >
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-light col-8">Proceed as Guest</button>
+                </div>
+            </form>
+        </div>
+    </check>
 </div>
 </body>
 </html>

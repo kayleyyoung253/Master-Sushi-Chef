@@ -12,7 +12,6 @@ $con = new Controller($f3);
 $menuData = new MenuData();
 
 
-
 //Define a default route-invoking route method
 $f3->route('GET /', function() {
     $GLOBALS['con']->home();
@@ -25,17 +24,17 @@ $f3->route('GET|POST /order', function($f3) {
 });
 
 //Define a default route to menu
-$f3->route('GET /checkout', function() {
+$f3->route('GET /checkout', function($f3) {
     $GLOBALS['con']->checkout();
 });
 
 //Define a default route to menu
-$f3->route('GET|POST /login', function() {
+$f3->route('GET|POST /login', function($f3) {
     $GLOBALS['con']->login();
 });
 
 //Define a default route to menu
-$f3->route('GET /rewards', function() {
+$f3->route('GET /rewards', function($f3) {
     $GLOBALS['con']->rewards();
 });
 

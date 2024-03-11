@@ -26,11 +26,13 @@ class Controller
     function order()
     {
         $user = $this->_f3->get('SESSION.user');
+
         if ($user != null) {
             echo "Logged in user";
         } else {
             echo "Not logged in";
         }
+
         // If the form has been posted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $selectedRolls = $this->_f3->get('POST.roll');
@@ -81,8 +83,11 @@ class Controller
             $orders = new Orders($rolls, $app, $totalPrice);
             // Put the object in the session array
             $this->_f3->set('SESSION.orders', $orders);
-            $menuData = new MenuData;
-            $menuData->saveOrder($this->_f3->get('SESSION.orders'), $user->getId());
+
+            if ($user != null) {
+                $menuData = new MenuData;
+                $menuData->saveOrder($this->_f3->get('SESSION.orders'), $user->getId());
+            }
             // Redirect to summary route
             $this->_f3->reroute('checkout');
         }

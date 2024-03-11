@@ -12,29 +12,51 @@
 
 <div class="d-flex justify-content-center">
 <div class="card" id="loginCard">
+    <check if="{{ @SESSION['user'] == null }}">
     <h2 id="loginTitle">Login</h2>
+    </check>
+<!--Member Information summary-->
+    <check if="{{ @SESSION['user'] !== null }}">
+        <div id="memberTitle">
+            <h2>Member Account</h2>
+            <p>User: {{@SESSION.user->getFname() }}  {{@SESSION.user->getLname() }} </p>
+            <p>Email: {{@SESSION.user->getEmail() }}  </p>
+            <p>Phone Number: {{@SESSION.user->getPhone() }}</p>
+
+        </div>
+
+    </check>
+
     <form action="#" method="post" id="loginForm">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password"><br>
+        <check if="{{ @SESSION['user'] == null }}">
+            <div class="form-group my-2">
+                <label for="username">Username:</label><br>
+                <input type="text" class="form-control"  id="username" name="username">
+            </div>
+            <div class="form-group my-2">
+                <label for="password">Password:</label><br>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+
         <!-- validate the user input -->
         <div class="text-center">
             <check if="{{ isset(@errors['login']) }}">
-                <span class="err">{{ @errors['login'] }}</span>
+                <span class="err">{{ @errors['login'] }}</span><br>
             </check>
+            <input type="submit" name="login" value="Login">
+            <a class="btn nav-link" href="makeAnAccount" id="startAccountButton">Start An Account</a>
         </div>
-        <div class="text-center"> <!-- Center the button -->
-            <check if="{{ @SESSION['user'] == null }}">
-                <input type="submit" name="login" value="Login">
-            </check>
+        </check>
+        <div class="text-center">
+
             <check if="{{ @SESSION['user'] !== null }}">
-                <input type="submit" name="logout" value="Logout">
+                <a href="rewards" class="btn btn-light mb-3">Check Past Orders</a>
+                <input type="submit" class="col-10" name="logout" value="Logout">
             </check>
         </div>
 
         <div>
-        <a class="btn nav-link" href="makeAnAccount" id="startAccountButton">Start An Account</a>
+
 </div>
     </form>
 </div>

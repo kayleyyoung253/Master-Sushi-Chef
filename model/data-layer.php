@@ -55,7 +55,7 @@ class menuData
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
                 if ($user['password'] == $passwordData && $user['username'] == $usernameData) {
-                        $userObj = new user($user['id'], $usernameData, $passwordData);
+                        $userObj = new user($user['id'], $usernameData, $passwordData, $user['fname'], $user['lname'], $user['email'], $user['phone']);
                     return $userObj;
 
                 } else {
@@ -76,9 +76,13 @@ class menuData
 
                 $usernameData = $_POST['username'];
                 $passwordData = $_POST['password'];
+                $fnameData = $_POST['fname'];
+                $lnameData = $_POST['lname'];
+                $emailData = $_POST['email'];
+                $phoneData = $_POST['phone'];
 
                 // define the query
-                $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+                $sql = "INSERT INTO users (username, password, fname, lname, email, phone) VALUES (:username, :password, :fname, :lname, :email, :phone)";
 
                 // prepare the statement
                 $statement = $this->_dbh->prepare($sql);
@@ -86,6 +90,10 @@ class menuData
                 // Bind parameters
                 $statement->bindParam(':username', $usernameData);
                 $statement->bindParam(':password', $passwordData);
+                $statement->bindParam(':fname', $fnameData);
+                $statement->bindParam(':lname', $lnameData);
+                $statement->bindParam(':email', $emailData);
+                $statement->bindParam(':phone', $phoneData);
 
                 // Execute the statement
                 $statement->execute();

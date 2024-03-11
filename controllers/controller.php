@@ -5,7 +5,9 @@ session_start();
  *
  */
 require_once('model/data-layer.php');
+require_once('model/Validate.php');
 require_once('classes/order.php');
+
 
 class Controller
 {
@@ -101,11 +103,56 @@ class Controller
 
     function makeAccount()
     {
-//        if($_SERVER['REQUEST_METHOD'] == 'POST') {
-//            $this->_f3->reroute('login');
-//        }
-        $menuData = new MenuData;
-        $menuData->createAccount();
+      if($_SERVER['REQUEST_METHOD'] == 'POST') {
+          $email = "";
+          $phone = "";
+          $fname = "";
+          $lname = "";
+          $username = $_POST['username'];
+          $password = $_POST['password'];
+
+          // Validate the data
+          //first name
+          if (Validate::validName($_POST['fname'])) {
+              $fname = $_POST['fname'];
+          }
+          else{
+              $this->_f3->set('errors["fname"]', "Invalid name");
+          }
+          //last name
+          if (Validate::validName($_POST['lname'])) {
+              $lname = $_POST['lname'];
+          }
+          else{
+              $this->_f3->set('errors["lname"]', "Invalid name");
+          }
+          //email
+          if (Validate::validEmail($_POST['email'])) {
+              $email = $_POST['email'];
+          }
+          else{
+              $this->_f3->set('errors["email"]', "Invalid Email");
+          }
+          //phone number
+          if (Validate::validPhone($_POST['phone'])) {
+              $phone = $_POST['phone'];
+          }
+          else{
+              $this->_f3->set('errors["phone"]', "Invalid number");
+          }
+
+          if (empty($this->_f3->get('errors'))) {
+              $user = new User($username, $password, $fname, $lname, $email, $phone);
+              $this->_f3->set('SESSION.user', $user);
+              $menuData = new MenuData;
+              $menuData->createAccount();
+              // Redirect to experience route
+              $this->_f3->reroute('login');
+          }
+      }
+
+
+
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/makeAccount.html');
@@ -153,25 +200,24 @@ class Controller
                     $this->_f3->reroute('login'); //Redirect to login page
                     exit;
                 }
-            }
-            // Handle login
-            elseif (isset($_POST['login'])) {
-                // Check if both username and password fields are provided
+            } else {
+                // Handle login
                 if (!empty($_POST['username']) && !empty($_POST['password'])) {
                     $menuData = new MenuData;
                     $user = $menuData->checkLogin();
                     if ($user instanceof user) {
                         $_SESSION['user'] = $user;
-                        echo "Logged in";
+                        $this->_f3->reroute('login'); //Redirect to dashboard or desired page after login
+                        exit;
                     } else {
-                        $this->_f3->set('errors["login"]', "invalid input");;
+                        $this->_f3->set('errors["login"]', "Invalid username or password");
                     }
                 } else {
-                    $this->_f3->set('errors["login"]', "Input required");;
+                    $this->_f3->set('errors["login"]', "Username and password are required");
                 }
             }
-        }
 
+        }
 
         //display a view page
         $view = new Template();// template is a class from fat-free

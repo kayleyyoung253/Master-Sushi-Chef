@@ -112,7 +112,7 @@
 #loginCard
 {
     align-self: center;
-    width: 30rem;
+
 
 }
 
@@ -126,5 +126,8 @@
     margin:inherit;
     align-self: center;
     width: 20rem;
+}
+#guestForm{
+    width: 30rem;
 }
 

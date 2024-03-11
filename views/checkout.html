@@ -37,12 +37,11 @@
         <div class="text-center my-5">
             <p> <a href="login" class="btn btn-light col-4 mx-3">Log in</a> <a href="makeAnAccount" class="btn btn-light col-4 mx-3">Sign Up</a></p>
         </div>
-
+      <div class="container d-flex justify-content-center">
         <div class="card mt-5" id="guestForm">
             <h3 class="checkoutCard">Checkout as Guest</h3>
             <form action="#" method="post">
-                <div class="row justify-content-center">
-                    <div class="col-10 my-2 p-1">
+                    <div class="col-md-8 offset-md-2 my-2 p-1" >
                         <div class="form-group">
                             <label for="name">Name</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -56,10 +55,12 @@
                             <input type="tel" class="form-control" id="phone" name="phone" >
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-light col-8">Proceed as Guest</button>
-                </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-light col--md-8">Proceed as Guest</button>
+                    </div>
             </form>
         </div>
+      </div>
     </check>
 </div>
 </body>

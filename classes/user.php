@@ -10,6 +10,8 @@ class user {
     private $_lname;
     private $_email;
     private $_phone;
+    private $_points_earned;
+    private $_points_used;
 
     /**
      * @param $_id
@@ -20,7 +22,7 @@ class user {
      * @param $_email
      * @param $_phone
      */
-    public function __construct($id="",$username="", $password="", $fname="", $lname="",$email="", $phone="")
+    public function __construct($id="",$username="", $password="", $fname="", $lname="",$email="", $phone="", $points_earned="", $points_used="")
     {
         $this->_id = $id;
         $this->_username = $username;
@@ -29,6 +31,8 @@ class user {
         $this->_lname = $lname;
         $this->_email = $email;
         $this->_phone = $phone;
+        $this->_points_earned = $points_earned;
+        $this->_points_used = $points_used;
 
     }
 
@@ -142,6 +146,38 @@ class user {
     public function setPhone($phone)
     {
         $this->_phone = $phone;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointsEarned()
+    {
+        return $this->_points_earned;
+    }
+
+    /**
+     * @param int $points_earned
+     */
+    public function setPointsEarned($points_earned)
+    {
+        $this->_points_earned = $points_earned;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointsUsed()
+    {
+        return $this->_points_used;
+    }
+
+    /**
+     * @param int $points_used
+     */
+    public function setPointsUsed($points_used)
+    {
+        $this->_points_used = $points_used;
     }
 
 

@@ -82,13 +82,16 @@ class Controller
             $this->_f3->set('SESSION.roll', $rolls);
             $this->_f3->set('SESSION.totalPrice', $totalPrice);
 
+            $pointsEarned = floor($totalPrice / 10);
             $orders = new Orders($rolls, $app, $totalPrice);
             // Put the object in the session array
             $this->_f3->set('SESSION.orders', $orders);
+            $this->_f3->set('SESSION.totalPrice', $totalPrice);
 
             if ($user != null) {
                 $menuData = new MenuData;
                 $menuData->saveOrder($this->_f3->get('SESSION.orders'), $user->getId());
+                $menuData->updatePointsBalance($user->getId(), $pointsEarned);
             }
             // Redirect to summary route
             $this->_f3->reroute('checkout');

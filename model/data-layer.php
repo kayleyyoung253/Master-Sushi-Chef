@@ -55,7 +55,7 @@ class menuData
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
                 if ($user['password'] == $passwordData && $user['username'] == $usernameData) {
-                        $userObj = new user($user['id'], $usernameData, $passwordData, $user['fname'], $user['lname'], $user['email'], $user['phone']);
+                        $userObj = new user($user['id'], $usernameData, $passwordData, $user['fname'], $user['lname'], $user['email'], $user['phone'], $user['points_earned'], $user['points_used']);
                     return $userObj;
 
                 } else {
@@ -80,9 +80,12 @@ class menuData
                 $lnameData = $_POST['lname'];
                 $emailData = $_POST['email'];
                 $phoneData = $_POST['phone'];
+                $points_earnedData = 0;
+                $points_usedData = 0;
+
 
                 // define the query
-                $sql = "INSERT INTO users (username, password, fname, lname, email, phone) VALUES (:username, :password, :fname, :lname, :email, :phone)";
+                $sql = "INSERT INTO users (username, password, fname, lname, email, phone) VALUES (:username, :password, :fname, :lname, :email, :phone, :points_earned, :points_used)";
 
                 // prepare the statement
                 $statement = $this->_dbh->prepare($sql);
@@ -94,6 +97,8 @@ class menuData
                 $statement->bindParam(':lname', $lnameData);
                 $statement->bindParam(':email', $emailData);
                 $statement->bindParam(':phone', $phoneData);
+                $statement->bindParam(':points_earned', $points_earnedData);
+                $statement->bindParam(':points_used', $points_usedData);
 
                 // Execute the statement
                 $statement->execute();
@@ -102,6 +107,16 @@ class menuData
         }
     }
 
+
+    public function updatePointsBalance($user_id, $points_earned)
+    {
+        // Update the points balance for the specified user ID in the database
+        $sql = "UPDATE users SET points = points + :points_earned WHERE id = :user_id";
+        $statement = $this->_dbh->prepare($sql);
+        $statement->bindParam(':points_earned', $points_earned);
+        $statement->bindParam(':user_id', $user_id);
+        $statement->execute();
+    }
 
     function saveOrder($orders, $user_id){
 

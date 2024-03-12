@@ -91,7 +91,7 @@ class Controller
             if ($user != null) {
                 $menuData = new MenuData;
                 $menuData->saveOrder($this->_f3->get('SESSION.orders'), $user->getId());
-                $menuData->updatePointsBalance($user->getId(), $pointsEarned);
+
             }
             // Redirect to summary route
             $this->_f3->reroute('checkout');

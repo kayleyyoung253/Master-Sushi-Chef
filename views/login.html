@@ -19,9 +19,11 @@
     <check if="{{ @SESSION['user'] !== null }}">
         <div id="memberTitle">
             <h2>Member Account</h2>
-            <p>User: {{@SESSION.user->getFname() }}  {{@SESSION.user->getLname() }} </p>
-            <p>Email: {{@SESSION.user->getEmail() }}  </p>
-            <p>Phone Number: {{@SESSION.user->getPhone() }}</p>
+            <div class="ms-3">
+                <p>User: {{@SESSION.user->getFname() }}  {{@SESSION.user->getLname() }} </p>
+                <p>Email: {{@SESSION.user->getEmail() }}  </p>
+                <p>Phone Number: {{@SESSION.user->getPhone() }}</p>
+            </div>
 
         </div>
 
@@ -43,7 +45,7 @@
             <check if="{{ isset(@errors['login']) }}">
                 <span class="err">{{ @errors['login'] }}</span><br>
             </check>
-            <input type="submit" name="login" value="Login">
+            <input type="submit" class="btn btn-light col-4" name="login" value="Login">
             <a class="btn nav-link" href="makeAnAccount" id="startAccountButton">Start An Account</a>
         </div>
         </check>

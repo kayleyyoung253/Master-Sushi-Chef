@@ -39,12 +39,10 @@
 #orderButton,#startAccountButton
 {
     font-family: "Comic Sans MS", serif ;
+    background-color:#efb0a9  !important;
 }
 
-.btn
-{
-     background-color:#efb0a9  !important;
- }
+
 
 .nav-link
 {
@@ -107,13 +105,13 @@
 .checkoutCard
 {
     align-self: center;
+
 }
 
 #loginCard
 {
     align-self: center;
-
-
+    width: 30rem;
 }
 
 #loginTitle,#memberTitle

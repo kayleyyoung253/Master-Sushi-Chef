@@ -7,7 +7,7 @@ session_start();
 require_once('model/data-layer.php');
 require_once('model/Validate.php');
 require_once('classes/order.php');
-
+require_once ('classes/user_updates.php');
 
 class Controller
 {
@@ -28,12 +28,6 @@ class Controller
     function order()
     {
         $user = $this->_f3->get('SESSION.user');
-
-        if ($user != null) {
-            echo "Logged in user";
-        } else {
-            echo "Not logged in";
-        }
 
         // If the form has been posted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -82,7 +76,6 @@ class Controller
             $this->_f3->set('SESSION.roll', $rolls);
             $this->_f3->set('SESSION.totalPrice', $totalPrice);
 
-            $pointsEarned = floor($totalPrice / 10);
             $orders = new Orders($rolls, $app, $totalPrice);
             // Put the object in the session array
             $this->_f3->set('SESSION.orders', $orders);
@@ -145,10 +138,26 @@ class Controller
           }
 
           if (empty($this->_f3->get('errors'))) {
-              $user = new User($username, $password, $fname, $lname, $email, $phone);
-              $this->_f3->set('SESSION.user', $user);
               $menuData = new MenuData;
               $menuData->createAccount();
+
+              if(isset ($_POST['mailing'])){
+                  $updates = 'yes';
+                  $user = new user_updates($updates);
+                  $this->_f3->set('updates', menuData::getUpdates());
+                  $user->setUpdates($updates);
+                  $user->setUsername($username);
+                  $user->setPassword($password);
+                  $user->setFname($fname);
+                  $user->setLName($lname);
+                  $user->setEmail($email);
+                  $user->setPhone($phone);
+                  $this->_f3->set('SESSION.user', $user);
+              } else{
+                  $user = new User($username, $password, $fname, $lname, $email, $phone);
+                  $this->_f3->set('SESSION.user', $user);
+              }
+
               // Redirect to experience route
               $this->_f3->reroute('login');
           }
@@ -163,26 +172,7 @@ class Controller
 
     function checkout()
     {
-        $user = $this->_f3->get('SESSION.user');
-        if ($user != null) {
-            echo "Logged in user";
-        } else {
-            echo "Not logged in";
-        }
 
-        if ($user != null) {
-            // param i
-            $menuData = new MenuData();
-            if ($user instanceof user) {
-                $orders = $menuData->loadOrders($user->getId());
-                // Process the result array
-                foreach ($orders as $row) {
-                    // Access individual columns using array keys
-                    echo "Order ID: " . $row['order_id'] . " Rolls: " . $row['rolls']
-                        . " Apps: " . $row['apps'] . " Total: $" . $row['totalPrice'] . "<br>";
-                }
-            }
-        }
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/checkout.html');
@@ -221,7 +211,6 @@ class Controller
             }
 
         }
-        var_dump($user);
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/login.html');

@@ -23,6 +23,9 @@
                 <p>User: {{@SESSION.user->getFname() }}  {{@SESSION.user->getLname() }} </p>
                 <p>Email: {{@SESSION.user->getEmail() }}  </p>
                 <p>Phone Number: {{@SESSION.user->getPhone() }}</p>
+                <check if="{{ @SESSION.user instanceof user_updates }}">
+                    <p>Get Updates: {{ @SESSION.user->getUpdates() }}</p>
+                </check>
             </div>
 
         </div>

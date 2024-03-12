@@ -202,6 +202,12 @@ class menuData
         );
     }
 
+
+    static function getUpdates(){
+        return ('yes');
+    }
+
+
     /**
      * @return array[] of roll values
      */

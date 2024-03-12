@@ -1,4 +1,8 @@
 <?php
+/*
+* index.php: routes for mastersushi chef
+* @authors Kayley Young, Levi Miller
+*/
 // Turn on error reporting
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -12,13 +16,13 @@ $con = new Controller($f3);
 $menuData = new MenuData();
 
 
-//Define a default route-invoking route method
+//Define a default route-invoking route method to home
 $f3->route('GET /', function() {
     $GLOBALS['con']->home();
 });
 
 
-//Define a default route-invoking route method
+//Define a route method to order page
 $f3->route('GET|POST /order', function($f3) {
     $GLOBALS['con']->order();
 });
@@ -28,18 +32,18 @@ $f3->route('GET /checkout', function($f3) {
     $GLOBALS['con']->checkout();
 });
 
-//Define a default route to menu
+//Define a default route to login
 $f3->route('GET|POST /login', function($f3) {
     $GLOBALS['con']->login();
 });
 
-//Define a default route to menu
+//Define a default route to orderHistory
 $f3->route('GET /rewards', function($f3) {
-    $GLOBALS['con']->rewards();
+    $GLOBALS['con']->orderHistory();
 });
 
 
-//Define a default route to menu
+//Define a default route to makeanaccount
 $f3->route('GET|POST /makeAnAccount', function() {
     $GLOBALS['con']->makeAccount();
 });

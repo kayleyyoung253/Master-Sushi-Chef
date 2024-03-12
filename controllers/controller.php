@@ -221,7 +221,7 @@ class Controller
             }
 
         }
-
+        var_dump($user);
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/login.html');
@@ -229,7 +229,7 @@ class Controller
 
 
 
-    function rewards()
+    function orderHistory()
     {
 
         $user = $this->_f3->get('SESSION.user');

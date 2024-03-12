@@ -1,6 +1,7 @@
 <?php
 /*
-data-layer.php: data for menu
+* data-layer.php: data for mastersushi chef
+* @authors Kayley Young, Levi Miller
 */
 require_once('model/data-layer.php');
 require($_SERVER['DOCUMENT_ROOT'] . '/../MSCDB.php');
@@ -55,7 +56,7 @@ class menuData
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
                 if ($user['password'] == $passwordData && $user['username'] == $usernameData) {
-                        $userObj = new user($user['id'], $usernameData, $passwordData, $user['fname'], $user['lname'], $user['email'], $user['phone'], $user['points_earned'], $user['points_used']);
+                        $userObj = new user($user['id'], $usernameData, $passwordData, $user['fname'], $user['lname'], $user['email'], $user['phone']);
                     return $userObj;
 
                 } else {
@@ -69,6 +70,10 @@ class menuData
     }
 
 
+    /**
+     * insert user information into user table for login access
+     * @return void
+     */
     function createAccount()
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -80,12 +85,10 @@ class menuData
                 $lnameData = $_POST['lname'];
                 $emailData = $_POST['email'];
                 $phoneData = $_POST['phone'];
-                $points_earnedData = 0;
-                $points_usedData = 0;
 
 
                 // define the query
-                $sql = "INSERT INTO users (username, password, fname, lname, email, phone) VALUES (:username, :password, :fname, :lname, :email, :phone, :points_earned, :points_used)";
+                $sql = "INSERT INTO users (username, password, fname, lname, email, phone) VALUES (:username, :password, :fname, :lname, :email, :phone)";
 
                 // prepare the statement
                 $statement = $this->_dbh->prepare($sql);
@@ -97,8 +100,7 @@ class menuData
                 $statement->bindParam(':lname', $lnameData);
                 $statement->bindParam(':email', $emailData);
                 $statement->bindParam(':phone', $phoneData);
-                $statement->bindParam(':points_earned', $points_earnedData);
-                $statement->bindParam(':points_used', $points_usedData);
+
 
                 // Execute the statement
                 $statement->execute();
@@ -108,16 +110,12 @@ class menuData
     }
 
 
-    public function updatePointsBalance($user_id, $points_earned)
-    {
-        // Update the points balance for the specified user ID in the database
-        $sql = "UPDATE users SET points = points + :points_earned WHERE id = :user_id";
-        $statement = $this->_dbh->prepare($sql);
-        $statement->bindParam(':points_earned', $points_earned);
-        $statement->bindParam(':user_id', $user_id);
-        $statement->execute();
-    }
-
+    /**
+     * save order from user into orders database
+     * @param $orders
+     * @param $user_id
+     * @return false|PDOStatement
+     */
     function saveOrder($orders, $user_id){
 
         // define the query
@@ -138,6 +136,11 @@ class menuData
         return $statement;
     }
 
+    /**
+     * pull orders from database and display them
+     * @param $user_id
+     * @return array|false
+     */
     function loadOrders($user_id) {
         $sql = "SELECT * FROM orders WHERE user_id = :id";
 

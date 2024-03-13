@@ -10,6 +10,7 @@ class user {
     private $_lname;
     private $_email;
     private $_phone;
+    private $_updatesStatus;
 
     /**
      * @param $_id
@@ -144,6 +145,34 @@ class user {
         $this->_phone = $phone;
     }
 
+    /**
+     * Set additional data from Applicant_SubscribedToLists object
+     * into the Applicant object
+     *
+     * @param Applicant_SubscribedToLists $applicantSubscribed
+     */
+    public function setAdditionalData(user_updates $userUpdated)
+    {
+        // Set additional data into user object
+        $this->_updates = $userUpdated->getUpdates();
 
+    }
+    /**
+     * Get the updates status of the user.
+     * @return bool The updates status (true if enabled, false if disabled)
+     */
+    public function getUpdatesStatus()
+    {
+        return $this->_updatesStatus;
+    }
+
+    /**
+     * Set the updates status of the user.
+     * @param bool $status The updates status to set (true for enabled, false for disabled)
+     */
+    public function setUpdatesStatus($status)
+    {
+        $this->_updatesStatus = $status;
+    }
 
 }

@@ -47,6 +47,10 @@ $f3->route('GET /rewards', function($f3) {
 $f3->route('GET|POST /makeAnAccount', function() {
     $GLOBALS['con']->makeAccount();
 });
+//define a default route to confirmation
+$f3->route('GET /confirmation', function(){
+    $GLOBALS['con']->confirmation();
+});
 
 //Define a default route to menu
 $f3->route('GET /menu', function() {

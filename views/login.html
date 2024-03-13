@@ -20,18 +20,19 @@
         <div id="memberTitle">
             <h2>Member Account</h2>
             <div class="ms-3">
-                <p>User: {{@SESSION.user->getFname() }}  {{@SESSION.user->getLname() }} </p>
-                <p>Email: {{@SESSION.user->getEmail() }}  </p>
-                <p>Phone Number: {{@SESSION.user->getPhone() }}</p>
-                <check if="{{ @SESSION.user instanceof user_updates }}">
-                    <p>Get Updates: {{ @SESSION.user->getUpdates() }}</p>
+                <check if="{{ @SESSION['user'] instanceof user }}">
+                    <p>User: {{ @SESSION.user->getFname() }} {{ @SESSION.user->getLname() }}</p>
+                    <p>Email: {{ @SESSION.user->getEmail() }}</p>
+                    <p>Phone Number: {{ @SESSION.user->getPhone() }}</p>
+
+                    <check if="{{ @SESSION.user->getUpdatesStatus() }}">
+                        <p>Get Updates: Enabled</p>
+                    </check>
                 </check>
             </div>
-
         </div>
-
     </check>
-
+<--login form-->
     <form action="#" method="post" id="loginForm">
         <check if="{{ @SESSION['user'] == null }}">
             <div class="form-group my-2">
@@ -43,7 +44,7 @@
                 <input type="password" class="form-control" id="password" name="password">
             </div>
 
-        <!-- validate the user input -->
+<!-- validate the user input -->
         <div class="text-center">
             <check if="{{ isset(@errors['login']) }}">
                 <span class="err">{{ @errors['login'] }}</span><br>

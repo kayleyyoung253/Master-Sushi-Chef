@@ -25,7 +25,56 @@ class menuData
         }
     }
 
+    /** check if username is inside database already, return false if found
+     * @return bool|void
+     */
+    function checkUsername()
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+            if (isset($_POST['username'])) {
+
+                $usernameData = $_POST['username'];
+
+
+                // define the query
+                $sql = "SELECT COUNT(*) FROM users WHERE username = :username";
+
+                // prepare the statement
+                $statement = $this->_dbh->prepare($sql);
+
+                //bind the parameter
+                $statement->bindParam(':username', $usernameData);
+
+
+                // execute
+                $statement->execute();
+                // process the results
+                $count = $statement->fetchColumn();
+
+
+                // Check if username exists
+                if ($count > 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
+    }
+    /**
+     * Check if the user has updates enabled
+     * @param int $userId The ID of the user
+     * @return bool True if updates are enabled, false otherwise
+     */
+    public function checkUpdates($userId)
+    {
+        // Get the updates status from the database
+        $updates = $this->getUserUpdates($userId);
+
+        // Return true if updates are enabled (value is 1), false otherwise
+        return ($updates == 1);
+    }
     /**
      *check if a member has logged in
      * @param password $passwordData
@@ -56,7 +105,9 @@ class menuData
                 $user = $statement->fetch(PDO::FETCH_ASSOC);
 
                 if ($user['password'] == $passwordData && $user['username'] == $usernameData) {
-                        $userObj = new user($user['id'], $usernameData, $passwordData, $user['fname'], $user['lname'], $user['email'], $user['phone']);
+                    $userUpdated= new user_updates($user['updates']);
+                    $userObj = new user($user['id'], $usernameData, $passwordData, $user['fname'], $user['lname'], $user['email'], $user['phone']);
+                    $userObj->setAdditionalData($userUpdated);
                     return $userObj;
 
                 } else {
@@ -67,6 +118,35 @@ class menuData
             }
         }
         return 0;
+    }
+    /**
+     * Get user updates status from the database
+     * @param int $userId The ID of the user
+     * @return int The updates status (0 or 1)
+     */
+    public function getUserUpdates($userId)
+    {
+        // Define the query to fetch updates status
+        $sql = "SELECT updates FROM users WHERE id = :userId";
+
+        // Prepare the statement
+        $statement = $this->_dbh->prepare($sql);
+
+        // Bind parameter
+        $statement->bindParam(':userId', $userId, PDO::PARAM_INT);
+
+        // Execute the statement
+        $statement->execute();
+
+        // Fetch the updates status
+        $updates = $statement->fetch(PDO::FETCH_COLUMN);
+
+        // Return the updates status
+        if ($updates == 1){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 
@@ -85,10 +165,10 @@ class menuData
                 $lnameData = $_POST['lname'];
                 $emailData = $_POST['email'];
                 $phoneData = $_POST['phone'];
-
+                $updatesData = isset($_POST['mailing']) ? 1 : 0;
 
                 // define the query
-                $sql = "INSERT INTO users (username, password, fname, lname, email, phone) VALUES (:username, :password, :fname, :lname, :email, :phone)";
+                $sql = "INSERT INTO users (username, password, fname, lname, email, phone, updates) VALUES (:username, :password, :fname, :lname, :email, :phone, :updates)";
 
                 // prepare the statement
                 $statement = $this->_dbh->prepare($sql);
@@ -100,6 +180,7 @@ class menuData
                 $statement->bindParam(':lname', $lnameData);
                 $statement->bindParam(':email', $emailData);
                 $statement->bindParam(':phone', $phoneData);
+                $statement->bindParam(':updates', $updatesData);
 
 
                 // Execute the statement
@@ -202,10 +283,6 @@ class menuData
         );
     }
 
-
-    static function getUpdates(){
-        return ('yes');
-    }
 
 
     /**

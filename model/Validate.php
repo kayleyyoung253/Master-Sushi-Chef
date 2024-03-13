@@ -24,6 +24,7 @@ class Validate
 
 
 
+
     /**
      * validate if a phone number entered contains only numbers
      * @param $phone

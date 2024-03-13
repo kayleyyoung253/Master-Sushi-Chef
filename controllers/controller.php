@@ -104,8 +104,9 @@ class Controller
           $phone = "";
           $fname = "";
           $lname = "";
-          $username = $_POST['username'];
+          $username =  $_POST['username'];
           $password = $_POST['password'];
+          $menuData = new MenuData;
 
           // Validate the data
           //first name
@@ -136,30 +137,35 @@ class Controller
           else{
               $this->_f3->set('errors["phone"]', "Invalid number");
           }
+            if(!$menuData->checkUsername()){
+                $this->_f3->set('errors["username]', "Username already in use");
+            }
+
 
           if (empty($this->_f3->get('errors'))) {
               $menuData = new MenuData;
               $menuData->createAccount();
 
+
               if(isset ($_POST['mailing'])){
-                  $updates = 'yes';
-                  $user = new user_updates($updates);
-                  $this->_f3->set('updates', menuData::getUpdates());
-                  $user->setUpdates($updates);
-                  $user->setUsername($username);
-                  $user->setPassword($password);
-                  $user->setFname($fname);
-                  $user->setLName($lname);
-                  $user->setEmail($email);
-                  $user->setPhone($phone);
+                  $updates = $_POST['mailing'];
+                  $userUpdated = new user_updates($updates);
+                  $user = new User($username, $password, $fname, $lname, $email, $phone);
+
+                  $user->setAdditionalData($userUpdated);
+
                   $this->_f3->set('SESSION.user', $user);
               } else{
                   $user = new User($username, $password, $fname, $lname, $email, $phone);
                   $this->_f3->set('SESSION.user', $user);
               }
+              if (isset($_SESSION['user'])) {
+                  session_destroy();
+                  $_SESSION['user'] = null; // Reset user session
+                  $this->_f3->reroute('login'); //Redirect to login page
+                  exit;
+              }
 
-              // Redirect to experience route
-              $this->_f3->reroute('login');
           }
       }
 
@@ -170,18 +176,12 @@ class Controller
         echo $view->render('views/makeAccount.html');
     }
 
-    function checkout()
-    {
-
-        //display a view page
-        $view = new Template();// template is a class from fat-free
-        echo $view->render('views/checkout.html');
-
-    }
 
     function login()
     {
-
+        $this->_f3->set('user', $_SESSION['user']);
+       // $user = $this->_f3->get('SESSION.user');
+       // var_dump($_SESSION);
         // Check if the form is submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Handle logout first
@@ -199,10 +199,17 @@ class Controller
                     $menuData = new MenuData;
                     $user = $menuData->checkLogin();
                     if ($user instanceof user) {
+                        // Fetch updates status
+                        $userId = $user->getId(); // Assuming getId() retrieves the user ID
+                        $updatesEnabled = $menuData->getUserUpdates($userId);
+
+                        // Set updates status for the user object
+                        $user->setUpdatesStatus($updatesEnabled);
+
                         $_SESSION['user'] = $user;
                         $this->_f3->reroute('login'); //Redirect to dashboard or desired page after login
-                        exit;
-                    } else {
+                    }
+                    else {
                         $this->_f3->set('errors["login"]', "Invalid username or password");
                     }
                 } else {
@@ -211,6 +218,8 @@ class Controller
             }
 
         }
+        var_dump($_SESSION);
+
         //display a view page
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/login.html');
@@ -234,7 +243,25 @@ class Controller
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/rewards.html');
     }
+    function checkout()
+    {
+        $user = $this->_f3->get('SESSION.user');
+        // Check if the form is submitted
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $this->_f3->reroute('confirmation');
+        }
 
+        //display a view page
+        $view = new Template();// template is a class from fat-free
+        echo $view->render('views/checkout.html');
+
+    }
+    function confirmation()
+    {
+        //display a view page
+        $view = new Template();// template is a class from fat-free
+        echo $view->render('views/confirmation.html');
+    }
 
     function menu()
     {

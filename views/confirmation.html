@@ -12,8 +12,23 @@
 <body id="checkoutBody">
 <include href="views/NavBar.html"/>
 <div class="container">
-    <div class="row justify-content-center">
-        <h2>Thank you for your order!</h2>
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center"> <!-- Use a block-level element such as <div> -->
+            <h1>Thank you for your order!</h1>
+            <p>Please allow 20-30 minutes for the preparation of your meal.</p>
+            <p>We are proud to serve you today.</p>
+            <h3>Enjoy!</h3><br>
+            <!-- Display different buttons based on user login status -->
+            <check if="{{ @SESSION['user'] !== null }}">
+                <!-- If user is logged in, display these buttons -->
+                <a href="{{@BASE}}" class="btn btn-light col-4 m-2 ">Home</a>
+                <a href="rewards" class="btn btn-light col-4 m-2">Order History</a>
+            </check>
+            <check if="{{ @SESSION['user'] == null }}">
+                <!-- If user is not logged in, display only the Home button -->
+                <a href="{{@BASE}}" class="btn btn-light col-8 m-2">Home</a>
+            </check>
+        </div>
     </div>
 
 </div>

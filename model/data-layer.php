@@ -62,19 +62,7 @@ class menuData
             }
         }
     }
-    /**
-     * Check if the user has updates enabled
-     * @param int $userId The ID of the user
-     * @return bool True if updates are enabled, false otherwise
-     */
-    public function checkUpdates($userId)
-    {
-        // Get the updates status from the database
-        $updates = $this->getUserUpdates($userId);
 
-        // Return true if updates are enabled (value is 1), false otherwise
-        return ($updates == 1);
-    }
     /**
      *check if a member has logged in
      * @param password $passwordData

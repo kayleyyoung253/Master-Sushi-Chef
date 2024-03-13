@@ -180,8 +180,7 @@ class Controller
     function login()
     {
         $this->_f3->set('user', $_SESSION['user']);
-       // $user = $this->_f3->get('SESSION.user');
-       // var_dump($_SESSION);
+
         // Check if the form is submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Handle logout first
@@ -218,7 +217,6 @@ class Controller
             }
 
         }
-        var_dump($_SESSION);
 
         //display a view page
         $view = new Template();// template is a class from fat-free
@@ -245,15 +243,35 @@ class Controller
     }
     function checkout()
     {
-        $user = $this->_f3->get('SESSION.user');
+
         // Check if the form is submitted
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $this->_f3->reroute('confirmation');
-        }
+            $email = "";
+            $phone = "";
+            $fname = $_POST['name'];
+            // Validate the data
 
-        //display a view page
-        $view = new Template();// template is a class from fat-free
-        echo $view->render('views/checkout.html');
+            //email
+            if (Validate::validEmail($_POST['email'])) {
+                $email = $_POST['email'];
+            } else {
+                $this->_f3->set('errors["email"]', "Invalid Email");
+            }
+            //phone number
+            if (Validate::validPhone($_POST['phone'])) {
+                $phone = $_POST['phone'];
+            } else {
+                $this->_f3->set('errors["phone"]', "Invalid number");
+            }
+
+            if (empty($this->_f3->get('errors'))) {
+
+                $this->_f3->reroute('confirmation');
+            }
+        }
+            //display a view page
+            $view = new Template();// template is a class from fat-free
+            echo $view->render('views/checkout.html');
 
     }
     function confirmation()

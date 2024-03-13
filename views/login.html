@@ -32,7 +32,7 @@
             </div>
         </div>
     </check>
-<--login form-->
+<!--login form-->
     <form action="#" method="post" id="loginForm">
         <check if="{{ @SESSION['user'] == null }}">
             <div class="form-group my-2">
@@ -57,7 +57,7 @@
 
             <check if="{{ @SESSION['user'] !== null }}">
                 <a href="rewards" class="btn btn-light mb-3">Check Past Orders</a>
-                <input type="submit" class="col-10" name="logout" value="Logout">
+                <input type="submit" class="col-10 btn btn-light" name="logout" value="Logout">
             </check>
         </div>
 

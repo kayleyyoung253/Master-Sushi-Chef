@@ -28,7 +28,7 @@ $f3->route('GET|POST /order', function($f3) {
 });
 
 //Define a default route to menu
-$f3->route('GET /checkout', function($f3) {
+$f3->route('GET|POST /checkout', function($f3) {
     $GLOBALS['con']->checkout();
 });
 

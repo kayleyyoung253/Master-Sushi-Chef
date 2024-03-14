@@ -236,36 +236,42 @@ class menuData
         return array(
             array(
                 'appname' => 'Gyoza',
+                'value'=>'gyoza',
                 'image' => 'Gyoza.jpeg',
                 'price' => 7.99,
                 'description' => 'Pan-fried Japanese dumplings filled with pork and vegetables.'
             ),
             array(
                 'appname' => 'Edamame',
+                'value'=>'edamame',
                 'image' => 'edamame.jpeg',
                 'price' => 4.99,
                 'description' => 'Steamed young soybeans sprinkled with sea salt.'
             ),
             array(
                 'appname' => 'Green beans',
+                'value'=>'greenbeans',
                 'image' => 'greenbean.jpeg',
                 'price' => 6.99,
                 'description' => 'Blanched green beans served with a savory sesame dressing.'
             ),
             array(
                 'appname' => 'Sashimi',
+                'value'=>'sashimi',
                 'image' => 'sashimi.jpeg',
                 'price' => 12.99,
                 'description' => 'Assorted slices of fresh raw fish served with soy sauce and wasabi.'
             ),
             array(
                 'appname' => 'Ajitama',
+                'value'=>'ajitama',
                 'image' => 'ajitama.jpeg',
                 'price' => 3.99,
                 'description' => 'Seasoned soft-boiled egg marinated in soy sauce and mirin.'
             ),
             array(
                 'appname' => 'Miso soup',
+                'value'=>'misosoup',
                 'image' => 'miso.jpeg',
                 'price' => 4.99,
                 'description' => 'Traditional Japanese soup made with miso paste, tofu, seaweed, and green onions.'
@@ -283,36 +289,42 @@ class menuData
         return array(
             array(
                 'name' => 'California roll',
+                'value'=>'californiaroll',
                 'image' => 'Cali.jpeg',
                 'price' => 8.99,
                 'description' => 'Fresh crab meat, cream cheese, and avocado, wrapped in sushi rice and seaweed.'
             ),
             array(
                 'name' => 'Spicy tuna roll',
+                'value'=>'spicytunaroll',
                 'image' => 'SpicyTuna.jpeg',
                 'price' => 10.99,
                 'description' => 'Tuna mixed with spicy mayo, cucumber, and scallions, wrapped in sushi rice and seaweed.'
             ),
             array(
                 'name' => 'Seattle roll',
+                'value'=>'seattleroll',
                 'image' => 'Seattle.jpeg',
                 'price' => 9.99,
                 'description' => 'Salmon, cream cheese, and cucumber, rolled in sushi rice and seaweed.'
             ),
             array(
                 'name' => 'Master roll',
+                'value'=>'masterroll',
                 'image' => 'MasterRoll.jpeg',
                 'price' => 12.99,
                 'description' => 'A signature roll with a blend of fresh crab, tobiko, and avocado, topped with eel and eel sauce.'
             ),
             array(
                 'name' => 'New york roll',
+                'value'=>'newyorkroll',
                 'image' => 'NewYork.jpeg',
                 'price' => 11.99,
                 'description' => 'cream cheese and cucumber, topped with salmon.'
             ),
             array(
                 'name' => 'Dragon roll',
+                'value'=>'dragonroll',
                 'image' => 'dragonroll.jpg',
                 'price' => 13.99,
                 'description' => 'Shrimp, tobiko, and cucumber, topped with salmon, onion and garlic sauce.'

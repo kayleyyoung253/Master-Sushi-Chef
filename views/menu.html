@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
     <include href="views/header.html" />
-    <meta charset="UTF-8">
     <title>Menu Options</title>
 </head>
 
@@ -30,12 +29,12 @@
         <div class="container" id="rolls">
             <div class="row">
                 <repeat group="{{ @roll }}" value="{{ @item }}">
-                    <label class="col-4 my-2">
+                    <div class="col-4 my-2">
                         <img src="images/{{ @item['image'] }}" class="img-fluid rounded-5" alt="{{ ucwords(@item['name']) }}" width="200" >
                         <h3>{{ ucwords(@item['name']) }}</h3>
                         <p>Price: ${{ @item['price'] }}</p>
                         <p>Description: {{ @item['description'] }}</p>
-                    </label>
+                    </div>
                 </repeat>
             </div>
         </div>

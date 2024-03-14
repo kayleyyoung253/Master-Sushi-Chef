@@ -5,7 +5,6 @@
 <html lang="en">
 <head>
     <include href="views/header.html" />
-    <meta charset="UTF-8">
     <title>Order Here</title>
 </head>
 <body id="orderBody">
@@ -19,32 +18,30 @@
                 <repeat group="{{ @appetizer }}" value="{{ @item }}">
                     <label class="col-4 my-2">
                         <img src="images/{{ @item['image'] }}" class="img-fluid rounded-5"  alt="{{ ucwords(@item['appname']) }}" height="400" width="400">
-                        <h3 class="mt-2">
-                            <input type="checkbox" name="appetizer[]" id="{{ @item['appname'] }}" value="{{ @item['appname'] }}" >
+                        <span class="menuOption">
+                            <input type="checkbox" name="appetizer[]" id="{{ @item['value'] }}" value="{{ @item['appname'] }}" data-value="{{ @item['value'] }}">
                             {{ ucwords(@item['appname']) }}
-                        </h3>
-                        <p>Price: ${{ @item['price'] }}</p>
-
+                        </span><br>
+                        <span>Price: ${{ @item['price'] }}</span>
                     </label>
                 </repeat>
             </div>
         </div>
         <h2 id="sushiOrder"><b>Sushi Rolls</b></h2>
-        <label class="container" id="rolls">
+        <div class="container" id="rolls">
             <div class="row">
                 <repeat group="{{ @roll }}" value="{{ @item }}">
                     <label class="col-4 my-2">
                         <img src="images/{{ @item['image'] }}" class="img-fluid rounded-5" alt="{{ ucwords(@item['name']) }}" width="400" >
-                        <h3>
-                            <input type="checkbox" name="roll[]" id="{{ @item['name'] }}" value="{{ @item['name'] }}">
+                        <span class="menuOption">
+                            <input type="checkbox" name="roll[]" id="{{ @item['value'] }}" value="{{ @item['name'] }}" data-value="{{ @roll['value'] }}">
                             {{ ucwords(@item['name']) }}
-                        </h3>
-                        <p>Price: ${{ @item['price'] }}</p>
-
+                        </span><br>
+                        <span>Price: ${{ @item['price'] }}</span>
                     </label>
                 </repeat>
             </div>
-        </label>
+        </div>
 
         <div class="d-grid gap-2 col-6 mx-auto" id="nextButtonContainer">
             <button type="submit" id="nextButton" class="btn btn-light">Check Out</button>

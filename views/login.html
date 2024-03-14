@@ -6,10 +6,9 @@
 <head>
     <include href="views/header.html"/>
     <title>Login</title>
-    <include href="views/NavBar.html"/>
 </head>
 <body id="loginBody">
-
+<include href="views/NavBar.html"/>
 <div class="d-flex justify-content-center">
 <div class="card" id="loginCard">
     <check if="{{ @SESSION['user'] == null }}">
@@ -56,7 +55,7 @@
         <div class="text-center">
 
             <check if="{{ @SESSION['user'] !== null }}">
-                <a href="rewards" class="btn btn-light mb-3">Check Past Orders</a>
+                <a href="orderHistory" class="btn btn-light mb-3">Check Past Orders</a>
                 <input type="submit" class="col-10 btn btn-light" name="logout" value="Logout">
             </check>
         </div>

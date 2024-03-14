@@ -38,7 +38,7 @@ $f3->route('GET|POST /login', function($f3) {
 });
 
 //Define a default route to orderHistory
-$f3->route('GET /rewards', function($f3) {
+$f3->route('GET /orderHistory', function($f3) {
     $GLOBALS['con']->orderHistory();
 });
 

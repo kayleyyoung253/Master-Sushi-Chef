@@ -1,6 +1,8 @@
 <?php
 /**
 * data-layer.php: data for master-sushi chef
+ * PDO -view and saves data into orders and users database
+ * also functions included that saves appetizers and rolls into an array of values
 * @authors Kayley Young, Levi Miller
 */
 require_once('model/data-layer.php');

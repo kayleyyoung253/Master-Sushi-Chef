@@ -119,7 +119,8 @@ class user {
     }
 
     /**
-     * @return mixed
+     * return the email that was entered
+     * @return string
      */
     public function getEmail()
     {
@@ -127,7 +128,7 @@ class user {
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
      */
     public function setEmail($email)
     {
@@ -135,7 +136,8 @@ class user {
     }
 
     /**
-     * @return mixed
+     * return the phone number that was entered
+     * @return string
      */
     public function getPhone()
     {
@@ -143,7 +145,7 @@ class user {
     }
 
     /**
-     * @param mixed $phone
+     * @param string $phone
      */
     public function setPhone($phone)
     {

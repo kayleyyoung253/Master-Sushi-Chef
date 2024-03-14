@@ -1,45 +1,50 @@
 <!-- Levi Miller, Kayley Young -->
 <!-- 2/7/24 -->
 <!-- homePage.html: homepage for Master Sushi Chef -->
-
-<include href="views/header.html" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <include href="views/header.html" />
+    <title>MasterSushi Chef Home Page</title>
+</head>
 <body>
-<include href="views/NavBar.html"/>
-<div id="homeBody">
-    <div class="row">
-        <!-- left colum -->
-        <div class="col-6" id="leftColum">
-            <div class="container">
-                <div class="card border border-dark">
-                    <h5 id="about">About MasterSushi Chef</h5>
-                    <div class="card-body">
-                        <p id="aboutUsText">
-                            Here at MasterSushi Chef we strive to use the freshest ingredients.We get daily deliveries of the
-                            highest quality fish. We offer main dishes and appetizers. For returning
-                            customers we offer a membership program where your past orders are saved plus an
-                            opportunity to signup for updates.
-                        </p>
+    <include href="views/NavBar.html"/>
+    <div id="homeBody">
+        <div class="row">
+            <!-- left colum -->
+            <div class="col-6" id="leftColum">
+                <div class="container">
+                    <div class="card border border-dark">
+                        <h5 id="about">About MasterSushi Chef</h5>
+                        <div class="card-body">
+                            <p id="aboutUsText">
+                                Here at MasterSushi Chef we strive to use the freshest ingredients.We get daily deliveries of the
+                                highest quality fish. We offer main dishes and appetizers. For returning
+                                customers we offer a membership program where your past orders are saved plus an
+                                opportunity to signup for updates.
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div class="container mt-4">
-                    <div id="welcomeStatement" class="text-center">
-                        <h1><b>QUALITY INGREDIENTS</b></h1>
-                        <h1><b>AUTHENTIC TASTE</b></h1>
-                        <p id="fontSpecified" class="mt-4" >Come try us out today!</p>
-                        <a href="order" class="btn btn-light rounded-pill ">Place an Order</a>
+                    <div class="container mt-4">
+                        <div id="welcomeStatement" class="text-center">
+                            <h1><b>QUALITY INGREDIENTS</b></h1>
+                            <h1><b>AUTHENTIC TASTE</b></h1>
+                            <p id="fontSpecified" class="mt-4" >Come try us out today!</p>
+                            <a href="order" class="btn btn-light rounded-pill ">Place an Order</a>
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
-        </div>
-        <!--right colum -->
-        <div class="col-6" id="rightColum">
-            <div class="container">
-            <div class="image-container">
-                <img src="images/sushi.webp" alt="sushi" class="w-100 rounded-5" id="sushiPic">
+            <!--right colum -->
+            <div class="col-6" id="rightColum">
+                <div class="container">
+                    <div class="image-container">
+                        <img src="images/sushi.webp" alt="sushi" class="w-100 rounded-5" id="sushiPic">
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>

@@ -3,6 +3,7 @@
  * @authors Levi Miller, Kayley Young
  * user_updates.php
  * holds getters and setters for user_updates class
+ * child class to user
  */
 class user_updates extends user
 {
@@ -18,7 +19,8 @@ class user_updates extends user
     }
 
     /**
-     * @return mixed
+     * return if they checked the updates enabled box
+     * @return string
      */
     public function getUpdates()
     {
@@ -26,7 +28,7 @@ class user_updates extends user
     }
 
     /**
-     * @param mixed $updates
+     * @param string $updates
      */
     public function setUpdates($updates)
     {

@@ -1,6 +1,6 @@
 <?php
-/*
-* index.php: routes for mastersushi chef
+/**
+* index.php: routes for master-sushi chef
 * @authors Kayley Young, Levi Miller
 */
 // Turn on error reporting

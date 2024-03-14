@@ -1,4 +1,9 @@
 <?php
+/**
+ * @authors Levi Miller, Kayley Young
+ * order.php
+ * holds getters and setters for order class
+ */
 class orders
 {
 

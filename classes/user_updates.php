@@ -1,5 +1,9 @@
 <?php
-
+/**
+ * @authors Levi Miller, Kayley Young
+ * user_updates.php
+ * holds getters and setters for user_updates class
+ */
 class user_updates extends user
 {
 

@@ -1,6 +1,6 @@
 <?php
-/*
-* data-layer.php: data for mastersushi chef
+/**
+* data-layer.php: data for master-sushi chef
 * @authors Kayley Young, Levi Miller
 */
 require_once('model/data-layer.php');

@@ -1,4 +1,9 @@
 <?php
+/**
+ * @authors Levi Miller, Kayley Young
+ * user.php
+ * holds getters and setters for user class
+ */
 class user {
 
     private $_id;
@@ -149,7 +154,6 @@ class user {
      * Set additional data from Applicant_SubscribedToLists object
      * into the Applicant object
      *
-     * @param Applicant_SubscribedToLists $applicantSubscribed
      */
     public function setAdditionalData(user_updates $userUpdated)
     {

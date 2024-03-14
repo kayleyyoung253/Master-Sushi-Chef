@@ -1,6 +1,5 @@
 <?php
-
-/*
+/**
  * 328/Master-Sushi-Chef/model/validate.php
  * Validate data for the user data
  * @author:Kayley Young and Levi Miller

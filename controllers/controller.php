@@ -2,12 +2,13 @@
 session_start();
 /**
  * the controller class for MasterSushi Chef
- *
+ * controller.php
+ * @authors Levi Miller, Kayley Young
  */
 require_once('model/data-layer.php');
 require_once('model/Validate.php');
 require_once('classes/order.php');
-require_once ('classes/user_updates.php');
+require_once('classes/user_updates.php');
 
 class Controller
 {
@@ -18,6 +19,10 @@ class Controller
         $this->_f3 = $f3;
     }
 
+    /**
+     * @return void
+     * displays home page
+     */
     function home()
     {
         // Display a view page
@@ -25,6 +30,10 @@ class Controller
         echo $view->render('views/homePage.html');
     }
 
+    /**
+     * @return void
+     * creates order and stores data in session array
+     */
     function order()
     {
         $user = $this->_f3->get('SESSION.user');
@@ -97,78 +106,78 @@ class Controller
         echo $view->render('views/order.html');
     }
 
+    /**
+     * @return void
+     * creates account inserted credentials into database
+     * and checks if input is validated then displays make an account page
+     */
     function makeAccount()
     {
-      if($_SERVER['REQUEST_METHOD'] == 'POST') {
-          $email = "";
-          $phone = "";
-          $fname = "";
-          $lname = "";
-          $username =  $_POST['username'];
-          $password = $_POST['password'];
-          $menuData = new MenuData;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $email = "";
+            $phone = "";
+            $fname = "";
+            $lname = "";
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $menuData = new MenuData;
 
-          // Validate the data
-          //first name
-          if (Validate::validName($_POST['fname'])) {
-              $fname = $_POST['fname'];
-          }
-          else{
-              $this->_f3->set('errors["fname"]', "Invalid name");
-          }
-          //last name
-          if (Validate::validName($_POST['lname'])) {
-              $lname = $_POST['lname'];
-          }
-          else{
-              $this->_f3->set('errors["lname"]', "Invalid name");
-          }
-          //email
-          if (Validate::validEmail($_POST['email'])) {
-              $email = $_POST['email'];
-          }
-          else{
-              $this->_f3->set('errors["email"]', "Invalid Email");
-          }
-          //phone number
-          if (Validate::validPhone($_POST['phone'])) {
-              $phone = $_POST['phone'];
-          }
-          else{
-              $this->_f3->set('errors["phone"]', "Invalid number");
-          }
-            if(!$menuData->checkUsername()){
+            // Validate the data
+            //first name
+            if (Validate::validName($_POST['fname'])) {
+                $fname = $_POST['fname'];
+            } else {
+                $this->_f3->set('errors["fname"]', "Invalid name");
+            }
+            //last name
+            if (Validate::validName($_POST['lname'])) {
+                $lname = $_POST['lname'];
+            } else {
+                $this->_f3->set('errors["lname"]', "Invalid name");
+            }
+            //email
+            if (Validate::validEmail($_POST['email'])) {
+                $email = $_POST['email'];
+            } else {
+                $this->_f3->set('errors["email"]', "Invalid Email");
+            }
+            //phone number
+            if (Validate::validPhone($_POST['phone'])) {
+                $phone = $_POST['phone'];
+            } else {
+                $this->_f3->set('errors["phone"]', "Invalid number");
+            }
+            if (!$menuData->checkUsername()) {
                 $this->_f3->set('errors["username]', "Username already in use");
             }
 
 
-          if (empty($this->_f3->get('errors'))) {
-              $menuData = new MenuData;
-              $menuData->createAccount();
+            if (empty($this->_f3->get('errors'))) {
+                $menuData = new MenuData;
+                $menuData->createAccount();
 
 
-              if(isset ($_POST['mailing'])){
-                  $updates = $_POST['mailing'];
-                  $userUpdated = new user_updates($updates);
-                  $user = new User($username, $password, $fname, $lname, $email, $phone);
+                if (isset ($_POST['mailing'])) {
+                    $updates = $_POST['mailing'];
+                    $userUpdated = new user_updates($updates);
+                    $user = new User($username, $password, $fname, $lname, $email, $phone);
 
-                  $user->setAdditionalData($userUpdated);
+                    $user->setAdditionalData($userUpdated);
 
-                  $this->_f3->set('SESSION.user', $user);
-              } else{
-                  $user = new User($username, $password, $fname, $lname, $email, $phone);
-                  $this->_f3->set('SESSION.user', $user);
-              }
-              if (isset($_SESSION['user'])) {
-                  session_destroy();
-                  $_SESSION['user'] = null; // Reset user session
-                  $this->_f3->reroute('login'); //Redirect to login page
-                  exit;
-              }
+                    $this->_f3->set('SESSION.user', $user);
+                } else {
+                    $user = new User($username, $password, $fname, $lname, $email, $phone);
+                    $this->_f3->set('SESSION.user', $user);
+                }
+                if (isset($_SESSION['user'])) {
+                    session_destroy();
+                    $_SESSION['user'] = null; // Reset user session
+                    $this->_f3->reroute('login'); //Redirect to login page
+                    exit;
+                }
 
-          }
-      }
-
+            }
+        }
 
 
         //display a view page
@@ -176,7 +185,12 @@ class Controller
         echo $view->render('views/makeAccount.html');
     }
 
-
+    /**
+     * @return void
+     * checks if user credentials are in database
+     * and gives access to member account if verified
+     * and displays login page
+     */
     function login()
     {
         $this->_f3->set('user', $_SESSION['user']);
@@ -207,8 +221,7 @@ class Controller
 
                         $_SESSION['user'] = $user;
                         $this->_f3->reroute('login'); //Redirect to dashboard or desired page after login
-                    }
-                    else {
+                    } else {
                         $this->_f3->set('errors["login"]', "Invalid username or password");
                     }
                 } else {
@@ -224,7 +237,11 @@ class Controller
     }
 
 
-
+    /**
+     * @return void
+     *  displays order history page and utilizes the
+     *  load order function
+     */
     function orderHistory()
     {
 
@@ -241,6 +258,12 @@ class Controller
         $view = new Template();// template is a class from fat-free
         echo $view->render('views/rewards.html');
     }
+
+    /**
+     * @return void
+     * displays checkout page
+     */
+
     function checkout()
     {
 
@@ -269,11 +292,17 @@ class Controller
                 $this->_f3->reroute('confirmation');
             }
         }
-            //display a view page
-            $view = new Template();// template is a class from fat-free
-            echo $view->render('views/checkout.html');
+        //display a view page
+        $view = new Template();// template is a class from fat-free
+        echo $view->render('views/checkout.html');
 
     }
+
+
+    /**
+     * @return void
+     * displays confirmation page
+     */
     function confirmation()
     {
         //display a view page
@@ -281,6 +310,11 @@ class Controller
         echo $view->render('views/confirmation.html');
     }
 
+    /**
+     * @return void
+     * pulls data from data-layer
+     * displays menu page
+     */
     function menu()
     {
         $this->_f3->set('appetizer', menuData::getAppetizer());

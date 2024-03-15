@@ -1,4 +1,4 @@
-# Master-Sushi-Chef
+Master-Sushi-Chef
 Website created for SDEV 328 using Fat-free and MVC, as well as GitHub. This is a sushi restaurant website to order food with many features.
 @Authors: Kayley Young, Levi Miller
 1. Our project includes classes, controller, model, and views. Within our model directory we have a data-layer.php that manages the data, including database interactions. We have a validate.php that handles data validation, and business logic implementation.The controllers directory holds the controller.php that manages the flow of data between the model and the view, The views directory has all the html pages and handles the presentation layer of the application, providing the user interface for interacting with the system. Views are responsible for rendering data from the model in a user-friendly format.
@@ -13,3 +13,4 @@ https://github.com/kayleyyoung253/Master-Sushi-Chef
 9. We used clean and clear code and provided comments through the project. Phpdocs and htmldocs are utilized throughout each file to ensure readability and is easy to pick up new code when other members add to it. Repeat tags are utilized so code is not repetitive. Data-layer.php contains getAppetizers() and getRolls() function to allow repeat tags in the order form
 10. We put many hours and lots of effort into this project, you can see that throughout the entire project. We took time to make sure our code was clean and both team members frequently went through code to clean up testing comments and added documentation where needed. Every view page created was checked with html5.validator.nu and corrected any errors that generated.
 
+<img height="250" src="/Users/kayleyyoung/Downloads/UML diagram.png" width="250"/>
